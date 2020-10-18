@@ -1,0 +1,68 @@
+<h1>Plant <%=@plant.nickname%>'s Page</h1>
+<%if @plant%> 
+Nickname: <%=@plant.nickname%> <br>
+Plant Type: <%=@plant.plant_type%>
+<%end%> 
+
+
+
+
+<%if @plant.logs.present?%>
+<h3>Care Logs:</h3>
+<%@plant.logs.each do |log|%>
+<ul><li>Water Date:<%=log.water_date%> Condition: <%=log.condition_update%> Notes: <%=log.notes%>
+</li></ul>
+<%end%><%end%><br>
+
+
+
+
+
+
+<%=form_for @plant do |f|%>
+<%=f.fields_for :logs, @plant.logs.build do |lf|%>
+<%=lf.hidden_field :plant_id %>
+<%=lf.label :water_date%>
+<%=lf.date_field :water_date%>
+<%=lf.label :notes%>
+<%=lf.text_field :notes%>
+
+<br><br> 
+
+Condition:
+<%=lf.collection_select :condition_update, @conditions, :to_s, :to_s%>
+ 
+ <%# <label> Current Condition:</label>
+ <select>
+ 
+<option value="log['condition_update']">It Died :(</option> 
+<option value="log['condition_update']">Significant Decline :(</option> 
+<option value="log['condition_update']">Slightly Worse</option>
+<option selected="selected" value="log['condition_update']">No Change</option>
+<option value="log['condition_update']">Slight Improvement</option> 
+<option value="log['condition_update']">Much Healthier</option>
+<option value="log['condition_update']">Best Yet! 8^)</option>
+</select> %>
+
+
+<%=lf.submit%>
+<%end%>
+<%end%>
+
+<%if @plant.comments.present?%>
+<h3>Comments:</h3>
+<%@plant.comments.each do |comment|%><ul>
+<li><%=link_to comment.commenter.username, user_path(comment.commenter)%>: <%=comment.content%>
+</li>
+</ul><%end%><%end%>
+
+
+<%= form_for @plant do |f|%>
+<%=f.fields_for :comments, @plant.comments.new do |cf|%> 
+<%=cf.hidden_field :plant_id %>
+<%=cf.hidden_field :commenter_id %>
+<%=cf.label :content, 'Add a Comment:'%>
+<%=cf.text_area :content %>
+<%=cf.submit%>
+<%end%><%end%><br>
+<%=button_to 'Back to Owner', user_path(@plant.user), method: :get%>

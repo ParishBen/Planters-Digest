@@ -1,0 +1,5 @@
+<strong>Plant: <%if @plant && @plant.comments.present?%><%=link_to @plant.nickname, plant_path(@plant)%>'s Comments  -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%><%else%>ALL COMMENTS</strong>
+<%end%><br><br>
+    <ul><%@comments.each do |comment|%>
+    <li><%=link_to comment.user.username, user_path(comment.user)%> says <%=comment.content%> <%if !@plant%>about <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</li><%end%>
+    <%end%></ul>

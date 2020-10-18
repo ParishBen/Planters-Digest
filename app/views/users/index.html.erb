@@ -1,0 +1,6 @@
+<h1>All Users Pages</h1>
+
+<%@users.each do |user|%>
+
+
+<ul><li><%=link_to user.username, user_path(user)%></li></ul><%end%>

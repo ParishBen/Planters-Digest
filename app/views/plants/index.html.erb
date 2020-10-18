@@ -1,0 +1,14 @@
+<%if flash[:notice]%>
+<%=flash[:notice]%>
+<%end%>
+<%if params[:user_id]%>
+<h1><%=@user.username%>'s Plants</h1>
+
+
+<%else%>
+    <h1>ALL PLANTS!</h1><%end%>
+<%@plants.each do |plant|%>
+<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%></li>
+</ul><%end%><br>
+<%if params[:user_id]%>
+<%=button_to 'Back to Owner', user_path(@user), method: :get%><%end%>
