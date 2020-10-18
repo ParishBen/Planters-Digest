@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/', to: 'users#welcome', as: 'welcome'
   delete "sessions", to: "sessions#destroy", as: "logout"
   get "signup", to: "users#new", as: "signup"
-  
+  post "/plants/:id", to: "plants#update"
   resources :comments, only: [:index, :create]
   resources :logs, only: [:index, :create]
   resources :plants do

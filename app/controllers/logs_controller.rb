@@ -20,4 +20,5 @@ class LogsController < ApplicationController
     def log_params
         params.require(:log).permit(:water_date, :notes, :plant_id, :condition_update)
     end
+ end
 end

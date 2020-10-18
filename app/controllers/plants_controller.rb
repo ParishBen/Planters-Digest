@@ -1,9 +1,11 @@
 class PlantsController < ApplicationController
+    include UsersHelper
     def show
         #@plant = Plant.find_by(id: params[:id])
         @conditions = ["It Died", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet!"]
         @log = Log.new
         @comment = Comment.new
+        @comment.commenter_id = current_user.id
         if params[:user_id]
             @user = User.find_by(id: params[:user_id]) 
             @plant = Plant.find_by(id: params[:id]) 
@@ -61,7 +63,7 @@ class PlantsController < ApplicationController
     
     private
     def plant_params
-        params.require(:plant).permit(:id, :nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:notes, :water_date, :plant_id])
+        params.require(:plant).permit(:id, :nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:condition_update, :notes, :water_date, :plant_id])
         
     end
 end
