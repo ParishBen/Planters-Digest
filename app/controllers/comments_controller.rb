@@ -33,6 +33,31 @@ class CommentsController < ApplicationController
        # raise params.inspect
     end
 
+    def edit
+        @comment = Comment.find(params[:id])
+        if @comment.commenter.id != current_user.id
+            redirect_to plant_path(@comment.plant)
+        else 
+            render :edit
+        end
+    end
+
+    def update
+        @comment = Comment.find(params[:id])
+        @comment.update(comment_params)
+        if @comment.save
+            redirect_to plant_path(@comment.plant)
+        else 
+            render :edit
+        end
+    end
+
+    def destroy
+        @comment = Comment.find(params[:id])
+        @plant = Plant.find_by(id: @comment.plant_id)
+        @comment.destroy
+        redirect_to plant_path(@plant)
+    end
 private
 def comment_params
     params.require(:comment).permit(:plant_id, :commenter_id, :content) || params.require(:comments).permit(:plant_id, :commenter_id, :content)

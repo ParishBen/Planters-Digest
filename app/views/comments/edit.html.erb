@@ -1,0 +1,9 @@
+<h1> Edit Comment</h1>
+
+<%=form_for(@comment) do |f|%>
+<%=f.label :content%>
+<%=f.text_area :content%>
+<%=f.hidden_field :commenter_id%>
+<%=f.hidden_field :plant_id%>
+<%=f.submit%>
+<%end%>
