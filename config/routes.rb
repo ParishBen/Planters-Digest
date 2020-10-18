@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   delete "sessions", to: "sessions#destroy", as: "logout"
   get "signup", to: "users#new", as: "signup"
   
-  
+  resources :comments, only: [:index, :create]
+  resources :logs, only: [:index, :create]
   resources :plants do
-    resources :logs
-    resources :comments, only: [:new, :create, :update, :edit, :destroy]
+    resources :logs, shallow: true
+    resources :comments, shallow: true
   end
   resources :users do 
     resources :plants, only: [:show, :index]

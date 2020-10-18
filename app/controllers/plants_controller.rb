@@ -1,19 +1,24 @@
 class PlantsController < ApplicationController
     def show
+        #@plant = Plant.find_by(id: params[:id])
         @conditions = ["It Died", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet!"]
+        @log = Log.new
+        @comment = Comment.new
         if params[:user_id]
-            @plant = Plant.find_by(id: params[:id])
             @user = User.find_by(id: params[:user_id]) 
-            @plant.logs.build   
-        elsif
-             @plant = Plant.find_by(id: params[:id])
-             #@plant.comments.build
+            @plant = Plant.find_by(id: params[:id]) 
+                #raise params.inspect
+        elsif !params[:user_id]
+            @plant = Plant.find_by(id: params[:id])
+            @user = @plant.user
+            
         else
-           
             flash[:notice] = "Sorry, That is not a Plant"
             redirect_to plants_path
-        end
-    end
+          end
+       
+     end
+   
     
     def index
         if params[:user_id]
@@ -56,7 +61,7 @@ class PlantsController < ApplicationController
     
     private
     def plant_params
-        params.require(:plant).permit(:nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:notes, :water_date, :plant_id])
+        params.require(:plant).permit(:id, :nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:notes, :water_date, :plant_id])
         
     end
 end

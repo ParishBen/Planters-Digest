@@ -1,0 +1,13 @@
+<h1>YOU GOT THERE</h1>
+
+<h1> Create a Log</h1>
+
+<%=form_for(@log) do |f|%>
+<%=f.label :water_date%>
+<%=f.date_field :water_date%>
+<%=f.hidden_field :plant_id%>
+<%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
+<%=f.label :notes%>
+<%=f.text_field :notes%>
+<%=f.submit%>
+<%end%>
