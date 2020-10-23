@@ -19,7 +19,7 @@
 <h3>Your Info:</h3><%else%> <h3>User Info:</h3><ul><%end%>
    <li>Username: <%=@user.username%></li>
     <li>Email: <%=@user.email%></li> 
-    
+    <li><%if @user == current_user%><%=link_to "Edit Info", edit_user_path(current_user)%></li><%end%>
 </ul></p>
 <%# <%= button_to "Log Out", { action: "delete"}, method: :delete, data: { confirm: "Are you sure?" } %>
     <%# <form method="post" action="sessions" class="button_to">

@@ -5,8 +5,8 @@ class User < ApplicationRecord
     has_many :commented_plants, through: :comments, source: :plant
     has_secure_password
     #has_many :tips
-    validates :username, :password, :password_confirmation, :email, presence: true
-    validates :password, confirmation: true
+    validates :username, :password, :email, presence: true
+    validates :username, uniqueness: true
     
     
     

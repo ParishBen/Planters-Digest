@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     def edit
         @user = User.find(params[:id])
         if @user != current_user
+            flash[:message]= "You aren't permitted to edit this User."
             redirect_to user_path(@user)
         end
     end
@@ -18,11 +19,13 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user != current_user
+            flash[:message]= "You aren't permitted to edit this User."
             redirect_to user_path(@user)
         elsif @user.update(user_params)
         if @user.save
             redirect_to user_path(@user)
         else 
+            flash[:message]="Please fill out all fields"
             render :edit
         end
       end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "signup", to: "users#new", as: "signup"
   post "/plants/:id", to: "plants#update"
   
+  get '/auth/google_oauth2/callback', to: "sessions#google"
   
   resources :comments, only: [:index, :create]
   resources :logs, only: [:new, :index, :create]

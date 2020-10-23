@@ -1,5 +1,5 @@
 <% if @user.errors.any?%>
-<div> id="error_explanation">
+<div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being saved.</h2>
 
 <ul>
@@ -7,7 +7,7 @@
 <li><%= msg %></li>
 </ul>
 </div>
-<%end%>
+<%end%><%end%>
 
 <h1>Create a Profile!</h1>
 <%=form_for(@user) do |f|%>
@@ -19,7 +19,7 @@
 <%=f.text_field :email%><br>
 <%=f.label :password%>
 <%=f.password_field :password%><br>
-<%=f.label :password_confirmation%>
-<%=f.password_field :password_confirmation%><br>
+
 <%=f.submit%>
 <%end%>
+<%=link_to "Back to Login", '/'%>
