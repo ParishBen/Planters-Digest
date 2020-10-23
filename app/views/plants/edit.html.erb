@@ -1,3 +1,15 @@
+<% if @plant.errors.any? || @comment.errors.any? || @log.errors.any?%>
+<div id="error_explanation">
+<h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</h2>
+
+
+<% @plant.errors.full_messages.each do |msg|%>
+<ul><li><%= msg %></li>
+
+
+<%end%>
+<%end%>
+
 <h1>Edit <%=@plant.nickname%></h1>
 <%=form_for(@plant) do |f|%>
 <%=f.label :plant_type%>
@@ -5,4 +17,5 @@
 <%=f.label :nickname%>
 <%=f.text_field :nickname%><br>
 <%=f.submit%>
-<%end%>
+<%end%><br>
+<%=link_to "Back to #{@plant.nickname}", plant_path(@plant)%>

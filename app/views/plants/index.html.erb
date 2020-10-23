@@ -1,6 +1,18 @@
-<%if flash[:notice]%>
-<%=flash[:notice]%>
+
+<%@plants.each do |plant|%>
+<%if plant.errors.any?%>
+<div id="error_explanation">
+<h2><%= pluralize(plant.errors.count, "error") %> prohibited this Plants' View from being shown.</h2>
+
+
+<% plant.errors.full_messages.each do |msg|%>
+<ul><li><%= msg %></li>
+</ul>
+</div>
+<%end%><%end%>
 <%end%>
+
+
 <%if params[:user_id]%>
 <h1><%=@user.username%>'s Plants</h1>
 
@@ -8,7 +20,7 @@
 <%else%>
     <h1>ALL PLANTS!</h1><%end%>
 <%@plants.each do |plant|%>
-<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%></li>
+<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li>
 </ul><%end%><br>
 <%if params[:user_id]%>
 <%=button_to 'Back to Owner', user_path(@user), method: :get%><%end%>

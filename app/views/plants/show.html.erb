@@ -1,23 +1,42 @@
-<%if @plant%> 
+<%if flash[:message]%> <%=flash[:message]%><%end%>
+
+ 
+
+<% if @plant.errors.any?%>
+<div id="error_explanation">
+ <h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated!</h2> 
+ <% @plant.errors.full_messages.each do |msg|%> 
+ <ul><li><%= msg %></li> 
+<%if @comment.errors.any?%>
+<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this Comment from posting!</h2>
+<% @comment.errors.full_messages.each do |msg|%>
+</ul><li><%= msg %></li>
+<%if @log.errors.any?%>
+<h2><%= pluralize(@log.errors.count, "error") %> prohibited this Log to be added!</h2>
+<% @log.errors.full_messages.each do |msg|%>
+</ul><li><%= msg %></li>
+</ul>
+</div>
+<%end%><%end%><%end%><%end%><%end%><%end%>
+
+
+<%if @plant%>                             
 <h1>Plant <%=@plant.nickname%>'s Page</h1>
 Nickname: <%=@plant.nickname%> <br>
 Plant Type: <%=@plant.plant_type%>
 <%end%> 
 
 
-
-
 <%if @plant.logs.present?%>
 <h3><%=@plant.nickname%>'s Care Logs:</h3>
 <%@plant.logs.each do |log|%>
-<ul><li>Water Date:<%=log.water_date%> Condition: <%=log.condition_update%> Notes: <%=log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%><%end%>
+<ul><li>Water Date:<%=log.water_date.strftime("%m/%d/%Y")%> Condition: <%=log.condition_update%> Notes: <%=log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%><%end%>
 </li></ul>
 <%end%><%end%><br>
 
 
-<%if @plant.user == current_user%>
-<%=button_to 'Add Log', new_plant_log_path(@plant, @log), method: :get%>
 
+<%if @plant.user == current_user%>
 
 <%=form_for(@plant) do |f|%>
 <%=f.fields_for :logs, @plant.logs.build do |lf|%>
@@ -46,8 +65,6 @@ Plant Type: <%=@plant.plant_type%>
 <h3>No Comments Yet:</h3>
 <%end%>
 
-
-<%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%>
 
 <%= form_for(@plant) do |f|%>
 <%=f.fields_for :comments, @comment do |cf|%> 

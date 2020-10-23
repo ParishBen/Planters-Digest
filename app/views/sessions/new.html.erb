@@ -1,14 +1,17 @@
 <h1>Please Login Below</h1>
-<div>
-<%if @errors.present?%>
-<% @errors.full_message.each do |message| %>
-<li><%=message%></li>
-<%end%>
+
+
+
+
+
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
 </div><%end%>
 
-<%if logged_in?%>
 
-<%else%>
+<%if !logged_in?%>
 <%=form_tag sessions_path do%>
 <%=label_tag :username%>
 <%=text_field_tag :username%><br>

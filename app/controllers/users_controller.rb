@@ -1,7 +1,31 @@
 class UsersController < ApplicationController
     include UsersHelper
     def welcome
-        render :welcome
+        if !logged_in?
+           render :welcome
+        else 
+            redirect_to user_path(current_user)
+        end
+    end
+    
+    def edit
+        @user = User.find(params[:id])
+        if @user != current_user
+            redirect_to user_path(@user)
+        end
+    end
+
+    def update
+        @user = User.find(params[:id])
+        if @user != current_user
+            redirect_to user_path(@user)
+        elsif @user.update(user_params)
+        if @user.save
+            redirect_to user_path(@user)
+        else 
+            render :edit
+        end
+      end
     end
 
     def new
@@ -23,8 +47,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by(id: params[:id])
-        
+        @user = User.find_by(id: params[:id])  
     end
 
     private

@@ -1,6 +1,18 @@
-<strong>Plant: <%if @plant && @plant.comments.present?%><%=link_to @plant.nickname, plant_path(@plant)%>'s Comments  -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%><%else%>ALL COMMENTS</strong>
+<%@comments.each do |comment|%>
+<% if comment.errors.any?%>
+<div id="error_explanation">
+<h2><%= pluralize(comment.errors.count, "error") %> prohibited the comments view page from being shown.</h2>
+
+
+<% comment.errors.full_messages.each do |msg|%>
+<ul><li><%= msg %></li></ul>
+</div>
+<%end%><%end%>
+<%end%>
+<br>
+<%if @plant && @plant.comments.present?%><h3>Plant: <%=link_to @plant.nickname, plant_path(@plant)%>'s Comments  -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%></h1><%else%><h2>ALL COMMENTS</h2>
 <%end%><br><br>
     <ul><%@comments.each do |comment|%>
     <li><%=link_to comment.commenter.username, user_path(comment.commenter)%> says <%=comment.content%> <%if !@plant%>about <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</li><%end%>
     <%end%></ul>
-   <%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%>
+   <%if params[:plant_id]%><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%>

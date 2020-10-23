@@ -1,15 +1,16 @@
 <% if @user.errors.any?%>
-<div> id="error_explanation">
-<h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being saved.</h2>
+<div id="error_explanation">
+<h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being edited.</h2>
 
-<ul>
+
+
+
 <% @user.errors.full_messages.each do |msg|%>
-<li><%= msg %></li>
+<ul><li><%= msg %></li>
 </ul>
 </div>
-<%end%>
-
-<h1>Create a Profile!</h1>
+<%end%><%end%>
+<h1>Edit Your Profile!</h1>
 <%=form_for(@user) do |f|%>
 <%=f.label :name%>
 <%=f.text_field :name%><br>

@@ -1,1 +1,24 @@
-<h1>so silly but every single log</h1>
+<%if @logs%>
+<%@logs.each do |log|%>
+<% if log.errors.any?%>
+<div id="error_explanation">
+<h2><%= pluralize(log.errors.count, "error") %> prohibited this log from being edited.</h2>
+
+
+<% log.errors.full_messages.each do |msg|%>
+<ul><li><%= msg %></li>
+</ul>
+</div>
+<%end%><%end%>
+<%end%><%end%>
+
+<h1><%if params[:plant_id]%><%=@plant.nickname%>'s Logs</h1><%else%>ALL LOGS</h1><%end%>
+
+<%if @logs.present?%><%@logs.each do |log|%>
+<ul><li>Water Date: <%= log.water_date.strftime("%m/%d/%Y")%> | Condition Update: <%=log.condition_update%> | Notes: <%=log.notes%> <%if !params[:plant_id]%>On: <%=link_to log.plant.nickname, plant_path(log.plant)%><%end%> Owner: <%=link_to log.plant.user.username, user_path(log.plant.user)%></li></ul>
+<%end%>
+<%else%>
+<h3>No Logs to date</h3>
+<%end%>
+
+

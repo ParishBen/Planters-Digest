@@ -59,6 +59,7 @@ class CommentsController < ApplicationController
         redirect_to plant_path(@plant)
     end
 private
+
 def comment_params
     params.require(:comment).permit(:plant_id, :commenter_id, :content) || params.require(:comments).permit(:plant_id, :commenter_id, :content)
 end
