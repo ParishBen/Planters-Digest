@@ -10,7 +10,7 @@ Bundle init to Bundle the following Ruby Gems:
 
 ruby '2.6.1'
 
-* Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+<li>Bundle edge Rails instead: gem 'rails', github: 'rails/rails'</li>
 <li>gem 'rails', '~> 6.0.3', '>= 6.0.3.4'</li>
 * Use sqlite3 as the database for Active Record
 <li>gem 'sqlite3', '~> 1.4'</li>
