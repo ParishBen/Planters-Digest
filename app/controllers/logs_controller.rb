@@ -1,9 +1,13 @@
 class LogsController < ApplicationController
     include UsersHelper
     def new
-        @log = Log.new
         @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
-        @log.plant_id = params[:plant_id] if params[:plant_id]
+        if params[:plant_id]
+            @log = Plant.find_by(id: params[:plant_id]).logs.build
+        else
+            @log = Log.new
+            @log.plant_id = params[:plant_id] if params[:plant_id]
+        end
     end
 
     def create
@@ -27,11 +31,11 @@ class LogsController < ApplicationController
    
     
     def edit
+        @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
         @log = Log.find_by(id: params[:id])
         @plant = Plant.find_by(id: @log.plant_id)        
         if !current_user.plants.include?(@plant)
           redirect_to plant_path(@plant)
-          @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
         end
     end
 
