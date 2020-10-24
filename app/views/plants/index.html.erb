@@ -1,3 +1,4 @@
+<%if flash[:message]%><%=flash[:message]%><%end%>
 
 <%@plants.each do |plant|%>
 <%if plant.errors.any?%>
@@ -20,7 +21,7 @@
 <%else%>
     <h1>ALL PLANTS!</h1><%end%>
 <%@plants.each do |plant|%>
-<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li>
+<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)%><%if !params[:user_id]%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li><%end%>
 </ul><%end%><br>
 <%if params[:user_id]%>
 <%=button_to 'Back to Owner', user_path(@user), method: :get%><%end%>

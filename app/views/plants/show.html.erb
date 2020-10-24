@@ -2,22 +2,26 @@
 
  
 
-<% if @plant.errors.any?%>
+<% if @plant && @plant.errors.any?%>
 <div id="error_explanation">
- <h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated!</h2> 
- <% @plant.errors.full_messages.each do |msg|%> 
- <ul><li><%= msg %></li> 
-<%if @comment.errors.any?%>
-<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this Comment from posting!</h2>
+<h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</h2>
+<% @plant.errors.full_messages.each do |msg|%>
+<ul><li><%= msg %></li></div>
+<%end%><%end%>
+
+<%if @comment && @comment.errors.any?%>
+<div id="error_explanation">
+<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</h2>
 <% @comment.errors.full_messages.each do |msg|%>
-</ul><li><%= msg %></li>
-<%if @log.errors.any?%>
-<h2><%= pluralize(@log.errors.count, "error") %> prohibited this Log to be added!</h2>
+<ul><li><%= msg %></li></div>
+<%end%><%end%>
+
+<%if @log && @log.errors.any?%>
+<div id="error_explanation">
+<h2><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</h2>
 <% @log.errors.full_messages.each do |msg|%>
-</ul><li><%= msg %></li>
-</ul>
-</div>
-<%end%><%end%><%end%><%end%><%end%><%end%>
+<ul><li><%= msg %></li></div>
+<%end%><%end%>
 
 
 <%if @plant%>                             

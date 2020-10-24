@@ -8,7 +8,7 @@ class User < ApplicationRecord
     validates :username, :password, :email, presence: true
     validates :username, uniqueness: true
     
-    
+    scope :most_plants, -> {User.left_joins(:plants).group('users.id').order('count(plants.user_id) desc')}
     
 
 end

@@ -6,34 +6,28 @@ class PlantsController < ApplicationController
         @log = Log.new
         @comment = Comment.new
         @comment.commenter_id = current_user.id
-        if !params[:user_id]
+          if !params[:user_id]
             @plant = Plant.find_by(id: params[:id])
-            @user = @plant.user
-            render :show
-        elsif params[:user_id]
+          elsif params[:user_id]
             @user = User.find_by(id: params[:user_id]) 
-            @plant = Plant.find_by(id: params[:id]) 
-        if !@user.plants.include?(@plant)
-            flash[:message] = "Sorry, that plant doesn't belong to that User"
-            redirect_to user_path(@user)
-        elsif @user.plants.include?(@plant)
+            @plant = Plant.find_by(id: params[:id])
+          if params[:user_id] && @user.plants.include?(@plant)
             render :show
-        else
-            flash[:notice] = "Sorry, That is not a Plant"
-            redirect_to plants_path
-            end
-         end
+          else
+          if params[:user_id] ? flash[:message] = "Sorry, That Plant doesn't belong to #{User.find(params[:user_id]).username}" : flash[:message]= "Sorry that isn't a Plant."
+             redirect_to plants_path
+          end
+        end
       end
-    
-     
-   
-    
+    end
+
+
     def index
         #if params[:user_id]
            if @user = User.find_by(id: params[:user_id])
-            @plants = User.find_by(id: params[:user_id]).plants
+            @plants = User.find_by(id: params[:user_id]).plants.popular
            else
-        @plants = Plant.all
+        @plants = Plant.popular
        end
        
     end
@@ -59,6 +53,7 @@ class PlantsController < ApplicationController
                     redirect_to plant_path(@plant)
           
         else 
+            binding.pry
             flash[:message]= "Comment's field cannot be empty."
             redirect_to plant_path(@plant) 
         #end

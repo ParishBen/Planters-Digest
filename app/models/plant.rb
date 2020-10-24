@@ -8,6 +8,7 @@ class Plant < ApplicationRecord
     accepts_nested_attributes_for :logs
     accepts_nested_attributes_for :commenters
 
+    scope :popular, -> {Plant.left_joins(:comments).group('plants.id').order('count(comments.plant_id) desc')}
     # def comments_attributes=(attributes)
     #     attributes.values.each do |attrs|
     #         attrs[:content]
