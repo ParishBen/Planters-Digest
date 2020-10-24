@@ -9,27 +9,24 @@ class UsersController < ApplicationController
     end
     
     def edit
+        redirect_if_not_logged_in
         @user = User.find(params[:id])
-        if @user != current_user
-            flash[:message]= "You aren't permitted to edit this User."
-            redirect_to user_path(@user)
-        end
+        not_current_user
     end
 
     def update
+        redirect_if_not_logged_in
         @user = User.find(params[:id])
-        if @user != current_user
-            flash[:message]= "You aren't permitted to edit this User."
-            redirect_to user_path(@user)
-        elsif @user.update(user_params)
+        not_current_user
+        @user.update(user_params)
         if @user.save
             redirect_to user_path(@user)
         else 
             flash[:message]="Please fill out all fields"
             render :edit
         end
-      end
     end
+    
 
     def new
         @user = User.new
@@ -41,20 +38,23 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to @user
         else
+            flash[:message]="Please fill out all fields"
             render :new
         end
     end
 
     def index
+        redirect_if_not_logged_in
         @users = User.most_plants
     end
 
     def show
-        @user = User.find_by(id: params[:id]) 
-         
+        redirect_if_not_logged_in
+        @user = User.find_by(id: params[:id])     
     end
 
     private
+    
     def user_params
         params.require(:user).permit(:username, :name, :email, :password, :password_confirmation)
     end

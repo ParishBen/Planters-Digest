@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
     end
 
     def destroy
+        redirect_if_not_logged_in
         reset_session
         redirect_to welcome_path
     end
@@ -44,7 +45,5 @@ class SessionsController < ApplicationController
     def auth
         request.env['omniauth.auth']
     end
-
-
     
 end
