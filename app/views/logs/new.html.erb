@@ -9,20 +9,22 @@
 </div>
 <%end%><%end%>
 
-<h1> Create a Log</h1>
+<%if !params[:plant_id]%><h1> Create a Log</h1><%else%><h1>New Log for <%=Plant.find(params[:plant_id]).nickname%></h1><%end%>
 <%if current_user.plants.empty?%>
 <p>Looks Like you need a Plant first <%=link_to 'Add A Plant', new_plant_path%></p>
 <%else%>
 
 <%=form_for(@log) do |f|%>
 <%if params[:plant_id].nil?%>
+<%=f.label "Plant:"%>
 <%=f.collection_select :plant_id, current_user.plants, :id, :nickname%>
 <%else%>
 <%=f.hidden_field :plant_id%><%end%>
-<%=f.label :water_date%>
+<%=f.label :water_date%>:
 <%=f.date_field :water_date%>
+<%=f.label :condition_update%>:
 <%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
-<%=f.label :notes%>
+<%=f.label :notes%>:
 <%=f.text_field :notes%>
 <%=f.submit%>
 <%end%><%end%>

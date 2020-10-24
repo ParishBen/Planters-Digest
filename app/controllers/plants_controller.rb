@@ -41,19 +41,20 @@ class PlantsController < ApplicationController
             
     def update
       redirect_if_not_logged_in
-        @plant = Plant.find(params[:id])        
-        @plant.update(plant_params)
-          if @plant.save
-            redirect_to plant_path(@plant)
-          elsif params[:plant][:comments_attributes] && params[:plant][:comments_attributes][:"0"][:content].blank?
-                flash[:message] = "Comment field must be filled out"
-                redirect_to plant_path(@plant)
-          elsif params[:plant][:logs_attributes] && params[:plant][:logs_attributes][:"0"][:water_date].blank?
-                    flash[:message] = "Logs must have Water Date & Condition Update."
-                    redirect_to plant_path(@plant)
-        else 
-            flash[:message]= "Comment's field cannot be empty."
-            redirect_to plant_path(@plant) 
+      @plant = Plant.find(params[:id])  
+            
+      @plant.update(plant_params)
+      if @plant.save
+          redirect_to plant_path(@plant)
+      elsif params[:plant][:comments_attributes] && params[:plant][:comments_attributes][:"0"][:content].blank?
+          flash[:message] = "Comment field must be filled out"
+          redirect_to plant_path(@plant)
+      elsif params[:plant][:logs_attributes] && params[:plant][:logs_attributes][:"0"][:water_date].blank?
+          flash[:message] = "Logs must have Water Date & Condition Update."
+          redirect_to plant_path(@plant)
+      else 
+          flash[:message]= "Comment's field cannot be empty."
+          redirect_to plant_path(@plant) 
        end
      end
 

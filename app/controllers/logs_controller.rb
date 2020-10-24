@@ -16,11 +16,13 @@ class LogsController < ApplicationController
         @log = Log.new(log_params)
         @plant = Plant.find_by(id: @log.plant_id)
         redirect_if_not_logged_in
-        elsif @log.save
+        if @log.save
         redirect_to plant_path(@plant)
         else
+            flash[:message]= "Ensure All Fields are filled out."
             @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
             render :new 
+        end
     end
     
     def show

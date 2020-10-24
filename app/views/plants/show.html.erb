@@ -105,4 +105,4 @@ Plant Type: <%=@plant.plant_type%>
 <%=cf.text_area :content %>
 <%=cf.submit%>
 <%end%><%end%><br>
-<%=button_to 'Back to Owner', user_path(@plant.user), method: :get%>
+<%=link_to 'Back to Owner', user_path(@plant.user)%>

@@ -16,8 +16,8 @@ class CommentsController < ApplicationController
         redirect_if_not_logged_in
         @comment = Comment.new
         @plant = Plant.find_by(id: params[:plant_id])
-        @comment.commenter_id = current_user.id
-        @comment.plant_id = @plant.id
+        # @comment.commenter_id = current_user.id
+        # @comment.plant_id = @plant.id
     end
 
     def create
