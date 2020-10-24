@@ -1,13 +1,14 @@
 class CommentsController < ApplicationController
    include UsersHelper
     def index 
-        @plant = Plant.find_by_id(params[:plant_id])
-        if @plant && @plant.comments.present?
-            @comments = @plant.comments
-            @comment = Comment.new
-        else
-            @comments = Comment.all
-        end
+    if params[:plant_id]
+        @plant = Plant.find_by(id: params[:plant_id])
+         @comments = Plant.find(params[:plant_id]).comments
+         @comment= Comment.new
+    else 
+        @comments = Comment.all             
+         
+      end
     end
 
     def new
@@ -61,7 +62,7 @@ class CommentsController < ApplicationController
 private
 
 def comment_params
-    params.require(:comment).permit(:plant_id, :commenter_id, :content) || params.require(:comments).permit(:plant_id, :commenter_id, :content)
+    params.require(:comment).permit(:plant_id, :commenter_id, :content)
 end
 
 

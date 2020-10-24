@@ -10,9 +10,15 @@
 <%end%><%end%>
 <%end%>
 <br>
-<%if @plant && @plant.comments.present?%><h3>Plant: <%=link_to @plant.nickname, plant_path(@plant)%>'s Comments  -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%></h1><%else%><h2>ALL COMMENTS</h2>
-<%end%><br><br>
-    <ul><%@comments.each do |comment|%>
-    <li><%=link_to comment.commenter.username, user_path(comment.commenter)%> says <%=comment.content%> <%if !@plant%>about <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</li><%end%>
-    <%end%></ul>
-   <%if params[:plant_id]%><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%>
+
+<%if @plant && @plant.comments.blank?%><h3>Plant: <%=link_to @plant.nickname, plant_path(@plant)%> Has No Comments. -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%></h3>
+<%elsif @plant && @plant.comments.present?%><h3>Plant: <%=link_to @plant.nickname, plant_path(@plant)%>'s Comments  -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%></h3>
+<br><br>
+<%else%> <h2>ALL COMMENTS</h2><%end%>
+
+    <%if @plant && @plant.comments.present? || !params[:plant_id]%>
+    <%@comments.each do |comment|%>
+    <ul><li><%=link_to comment.commenter.username, user_path(comment.commenter)%> says <%=comment.content%> <%if !@plant%>about <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</li><%end%>
+   </ul><%end%><%end%>
+  
+   <%if @plant%><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%>
