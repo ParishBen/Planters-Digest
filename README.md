@@ -28,13 +28,10 @@ ruby '2.6.1'
 <li> gem 'redis', '~> 4.0'</li>
 # Use Active Model has_secure_password
 <li>gem 'bcrypt', '~> 3.1.7'</li>
-
 # Use Active Storage variant
  <li>gem 'image_processing', '~> 1.2'</li>
-
 * Reduces boot times through caching; required in config/boot.rb
 <li>gem 'bootsnap', '>= 1.4.2', require: false</li>
-
 <li>group :development, :test do</li>
   * Call 'byebug' anywhere in the code to stop execution and get a debugger console
   <li>gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]</li>
