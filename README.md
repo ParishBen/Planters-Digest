@@ -10,7 +10,7 @@ Bundle init to Bundle the following Ruby Gems:
 
 ruby '2.6.1'
 
-* Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+<li>Bundle edge Rails instead: gem 'rails', github: 'rails/rails'</li>
 <li>gem 'rails', '~> 6.0.3', '>= 6.0.3.4'</li>
 * Use sqlite3 as the database for Active Record
 <li>gem 'sqlite3', '~> 1.4'</li>
@@ -25,16 +25,13 @@ ruby '2.6.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 <li>gem 'jbuilder', '~> 2.7'</li>
 # Use Redis adapter to run Action Cable in production
-<li># gem 'redis', '~> 4.0'</li>
+<li> gem 'redis', '~> 4.0'</li>
 # Use Active Model has_secure_password
 <li>gem 'bcrypt', '~> 3.1.7'</li>
-
-* Use Active Storage variant
+# Use Active Storage variant
  <li>gem 'image_processing', '~> 1.2'</li>
-
 * Reduces boot times through caching; required in config/boot.rb
 <li>gem 'bootsnap', '>= 1.4.2', require: false</li>
-
 <li>group :development, :test do</li>
   * Call 'byebug' anywhere in the code to stop execution and get a debugger console
   <li>gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]</li>
