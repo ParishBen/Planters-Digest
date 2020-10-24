@@ -1,5 +1,5 @@
-# Planter's Digest
-Plant's Digest is a Ruby on Rails Web Application that allows the user to not only stay accountable by tracking the progress of their house plants, but also leave tips/comments to all other users's plants.
+l# Planter's Digest
+Planter's Digest is a Ruby on Rails Web Application that allows the user to not only stay accountable by tracking the progress of their house plants, but also leave tips/comments to all other users's plants.
 
 * Ruby version
 2.6.1
@@ -10,65 +10,65 @@ Bundle init to Bundle the following Ruby Gems:
 
 ruby '2.6.1'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-<li>gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-# Use Puma as the app server
-gem 'puma', '~> 4.1'
+* Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+<li>gem 'rails', '~> 6.0.3', '>= 6.0.3.4'</li>
+* Use sqlite3 as the database for Active Record
+<li>gem 'sqlite3', '~> 1.4'</li>
+<li># Use Puma as the app server
+<li>gem 'puma', '~> 4.1'</li>
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+<li>gem 'sass-rails', '>= 6'</li>
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+<li>gem 'webpacker', '~> 4.0'</li>
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+<li>gem 'turbolinks', '~> 5'</li>
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+<li>gem 'jbuilder', '~> 2.7'</li>
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+<li># gem 'redis', '~> 4.0'</li>
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+<li>gem 'bcrypt', '~> 3.1.7'</li>
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+* Use Active Storage variant
+ <li>gem 'image_processing', '~> 1.2'</li>
 
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+* Reduces boot times through caching; required in config/boot.rb
+<li>gem 'bootsnap', '>= 1.4.2', require: false</li>
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+<li>group :development, :test do</li>
+  * Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  <li>gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]</li>
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  * Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  <li>gem 'web-console', '>= 3.3.0'</li>
+  <li>gem 'listen', '~> 3.2'</li>
+  * Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  <li>gem 'spring'</li>
+  <li>gem 'spring-watcher-listen', '~> 2.0.0'</li>
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  * Adds support for Capybara system testing and selenium driver
+  <li>gem 'capybara', '>= 2.15'</li>
+  <li>gem 'selenium-webdriver'</li>
+  * Easy installation and use of web drivers to run system tests with browsers
+  <li>gem 'webdrivers'</li>
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+* Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+<li>gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]</li>
 
-gem "pry", "~> 0.13.1"
+<li>gem "pry", "~> 0.13.1"</li>
 
-gem "faker", "~> 2.14"
+<li>gem "faker", "~> 2.14"</li>
 
-gem "omniauth", "~> 1.9"
+<li>gem "omniauth", "~> 1.9"</li>
 
-gem "dotenv-rails", "~> 2.7"
+<li>gem "dotenv-rails", "~> 2.7"</li>
 
-gem "omniauth-google-oauth2", "~> 0.8.0"</li>
+<li>gem "omniauth-google-oauth2", "~> 0.8.0"</li>
 
 
 
