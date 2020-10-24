@@ -1,4 +1,4 @@
-l# Planter's Digest
+# Planter's Digest
 Planter's Digest is a Ruby on Rails Web Application that allows the user to not only stay accountable by tracking the progress of their house plants, but also leave tips/comments to all other users's plants.
 
 * Ruby version
