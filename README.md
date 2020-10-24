@@ -1,24 +1,106 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+# Planter's Digest
+Plant's Digest is a Ruby on Rails Web Application that allows the user to not only stay accountable by tracking the progress of their house plants, but also leave tips/comments to all other users's plants.
 
 * Ruby version
+2.6.1
 
-* System dependencies
 
-* Configuration
+# Prerequisites
+Bundle init to Bundle the following Ruby Gems:
 
-* Database creation
+ruby '2.6.1'
 
-* Database initialization
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+<li>gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3', '~> 1.4'
+# Use Puma as the app server
+gem 'puma', '~> 4.1'
+# Use SCSS for stylesheets
+gem 'sass-rails', '>= 6'
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'webpacker', '~> 4.0'
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.7'
+# Use Redis adapter to run Action Cable in production
+# gem 'redis', '~> 4.0'
+# Use Active Model has_secure_password
+gem 'bcrypt', '~> 3.1.7'
 
-* How to run the test suite
+# Use Active Storage variant
+# gem 'image_processing', '~> 1.2'
 
-* Services (job queues, cache servers, search engines, etc.)
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.4.2', require: false
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
+group :development do
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.2'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
+  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'webdrivers'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "pry", "~> 0.13.1"
+
+gem "faker", "~> 2.14"
+
+gem "omniauth", "~> 1.9"
+
+gem "dotenv-rails", "~> 2.7"
+
+gem "omniauth-google-oauth2", "~> 0.8.0"</li>
+
+
 
 * Deployment instructions
 
-* ...
+# Installation
+<li>
+Travel to https://github.com/ParishBen/plant_diary_digest to clone the repo. 
+Reach out to ParishBen13@gmail.com for Session Secrete variable.
+Bundle Install the above gem list.
+Execute shotgun to rackup project to your browser on your localhost.
+Signup & go!
+</li>
+
+# Contributing Guidelines
+<p> Thanks for taking the time to contribute!<br>
+The following is a short set of guideline to contribute to Plant Diary Digest.<br></p>
+<li>
+First and foremost get the Ruby Environment installed.  Then you'll need to follow the instructions above Installation instruction. 
+</li>
+<li>Feel free to reach out at any point to ParishBen13@gmail.com regarding any issues</li>
+<li>Pull Requests are welcome! Please ensure to leave a detailed PR description of the problem & solution.</li>
+
+# Built With
+<li>
+Ruby on Rails
+</li>
+
+# Author
+<li> Benjamin Parish</li>
+
+# License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+

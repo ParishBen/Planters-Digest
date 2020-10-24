@@ -57,8 +57,6 @@ gem "pry", "~> 0.13.1"
 
 gem "faker", "~> 2.14"
 
-gem "oauth", "~> 0.5.4"
-
 gem "omniauth", "~> 1.9"
 
 gem "dotenv-rails", "~> 2.7"
