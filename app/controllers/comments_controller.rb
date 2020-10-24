@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     if params[:plant_id]
         @plant = Plant.find_by(id: params[:plant_id])
          @comments = Plant.find(params[:plant_id]).comments
-         @comment= Comment.new
+         @comment = Comment.new
     else 
         @comments = Comment.all             
          
@@ -52,6 +52,13 @@ class CommentsController < ApplicationController
             render :edit
         end
     end
+
+    def show
+        @comment = Comment.find(params[:id])
+        @plant = Plant.find_by(id: @comment.plant_id)
+        flash[:message]= "Directed To Comment's Plant Page"
+        redirect_to plant_path(@plant)
+        end
 
     def destroy
         @comment = Comment.find(params[:id])

@@ -26,6 +26,7 @@ class LogsController < ApplicationController
     def show
         @log = Log.find(params[:id])
         @plant = Plant.find_by(id: @log.plant_id)
+        flash[:message]= "Directed To Log's Plant Page"
         redirect_to plant_path(@plant)
     end
    

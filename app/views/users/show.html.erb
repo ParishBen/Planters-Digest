@@ -1,5 +1,5 @@
 <% if @user.errors.any?%>
-<div> id="error_explanation">
+<div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being updated.</h2>
 
 <ul>
@@ -39,8 +39,10 @@
     <h3>No Plants Yet</h3>
     <%end%>
    
+    <br><br>
 
    <%if  current_user==@user%>
     <%= button_to "Log Out", logout_path, :method => :delete, data: {confirm: "Please Confirm to Logout"}%><%end%>
     <%if !logged_in?%>
     <p>Please <%=link_to "Sign Up", signup_path%> or <%=link_to "Log in", login_path%></p><%end%>
+    <%if @user == current_user%><%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are You Sure You Want to Delete Account?" } %> <%end%>

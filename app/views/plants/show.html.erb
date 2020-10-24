@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+body {
+background-color: lightblue;
+}
+</style>
+</head>
+
+
 <%if flash[:message]%> <%=flash[:message]%><%end%>
 
  
@@ -33,12 +46,26 @@ Plant Type: <%=@plant.plant_type%>
 
 <%if @plant.logs.present?%>
 <h3><%=@plant.nickname%>'s Care Logs:</h3>
+
+<table>
+  <tr>
+        <th>Water Date</th>
+        <th>Condition</th>
+        <th>Notes</th>
+ </tr>
+
+
+
 <%@plant.logs.each do |log|%>
-<ul><li>Water Date:<%=log.water_date.strftime("%m/%d/%Y")%> Condition: <%=log.condition_update%> Notes: <%=log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%><%end%>
-</li></ul>
-<%end%><%end%><br>
+<tr>
+<td> <%= log.water_date.strftime("%m/%d/%Y")%></td>
+<td> <%= log.condition_update%></td>
+<td> <%= log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></td><%end%>
+</tr>
 
-
+<%end%><%end%>
+</table>
+<br>
 
 <%if @plant.user == current_user%>
 
