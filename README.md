@@ -71,21 +71,18 @@ end
 <li>gem "omniauth-google-oauth2", "~> 0.8.0"</li>
 
 
-
-* Deployment instructions
-
 # Installation
 <li>
-Travel to https://github.com/ParishBen/plant_diary_digest to clone the repo. 
-Reach out to ParishBen13@gmail.com for Session Secrete variable.
-Bundle Install the above gem list.
-Execute shotgun to rackup project to your browser on your localhost.
+Travel to https://github.com/ParishBen/planters-digest to clone the repo. 
+
+In your terminal Bundle Install the above gem list.
+Next execute rails s to startup the web application to your browser & then navigate to localhost:3000. 
 Signup & go!
 </li>
 
 # Contributing Guidelines
 <p> Thanks for taking the time to contribute!<br>
-The following is a short set of guideline to contribute to Plant Diary Digest.<br></p>
+The following is a short set of guideline to contribute to Planter's Digest.<br></p>
 <li>
 First and foremost get the Ruby Environment installed.  Then you'll need to follow the instructions above Installation instruction. 
 </li>
