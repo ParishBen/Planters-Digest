@@ -29,7 +29,7 @@ ruby '2.6.1'
 # Use Active Model has_secure_password
 <li>gem 'bcrypt', '~> 3.1.7'</li>
 
-* Use Active Storage variant
+# Use Active Storage variant
  <li>gem 'image_processing', '~> 1.2'</li>
 
 * Reduces boot times through caching; required in config/boot.rb
