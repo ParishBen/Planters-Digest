@@ -5,10 +5,6 @@
 </head>
 <body>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
 
 <%@plants.each do |plant|%>
 <%if plant.errors.any?%>
@@ -23,6 +19,10 @@
 <%end%><%end%>
 <%end%>
 
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <%if params[:user_id]%>
 <h1><%=@user.username%>'s Plants</h1>

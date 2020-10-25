@@ -4,10 +4,6 @@
 
 </head>
 <body>
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
 
 <% if @comment.errors.any?%>
 <div id="error_explanation">
@@ -19,6 +15,10 @@
 <%end%>
 <%end%>
 
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 <h1> Edit Comment</h1>
 
 <%=form_for(@comment) do |f|%>

@@ -5,10 +5,6 @@
 </head>
 <body>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
 
  
 
@@ -33,6 +29,10 @@
 <ul><li><%= msg %></li></div>
 <%end%><%end%>
 
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <%if @plant%>                             
 <h1>Plant <%=@plant.nickname%>'s Page</h1>
