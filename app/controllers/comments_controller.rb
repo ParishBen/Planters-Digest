@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
         if @comment.save
             redirect_to plant_path(@plant)
         else
-            flash[:notice]= "Please ensure content is not empty."
+            flash[:message]= "Please ensure content is not empty."
             render :new
         end
     end
@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
         if @comment.save
             redirect_to plant_path(@comment.plant)
         else 
-            flash[:notice]= "Please ensure content is not empty." 
+            flash[:message]= "Please ensure content is not empty." 
             render :edit
         end
     end

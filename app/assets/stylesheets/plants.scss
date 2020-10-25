@@ -5,10 +5,15 @@
 table, th, td {
   border: 1px solid black;
 }
+th {  font-weight: bold;
+}
 #error_explanation {
   font-weight: bold;
   color: red;
   text-decoration: underline;
+}
+label {
+    font-weight: bold;
 }
 body {
 background-color: lightblue;

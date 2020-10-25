@@ -28,9 +28,9 @@ module UsersHelper
 
     def not_the_commenter
         if @comment.commenter_id != current_user.id
-            flash[:notice]= "You aren't permitted to Edit this Comment"
+            flash[:message]= "You aren't permitted to Edit this Comment"
             redirect_to plant_path(@comment.plant)
         end
     end
-    
+
 end
