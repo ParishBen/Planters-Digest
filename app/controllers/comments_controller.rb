@@ -19,9 +19,6 @@ class CommentsController < ApplicationController
              @plant = Plant.find_by(id: params[:plant_id])
              @comment = @plant.comments.build
         end
-
-        # @comment.commenter_id = current_user.id
-        # @comment.plant_id = @plant.id
     end
 
     def create
