@@ -1,7 +1,12 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/plants.scss" type="text/css">
+
+</head>
+<body>
 <% if @plant.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from being saved.</h2>
-
 
 <% @plant.errors.full_messages.each do |msg|%>
 <ul><li><%= msg %></li>
@@ -9,6 +14,11 @@
 </div>
 <%end%>
 <%end%>
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <h1> Create a Plant</h1>
 
@@ -23,3 +33,4 @@
 
 <br>
 <%=link_to "Back to Profile", user_path(current_user)%>
+</body></html>

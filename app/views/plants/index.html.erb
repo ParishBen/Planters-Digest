@@ -1,4 +1,14 @@
-<%if flash[:message]%><%=flash[:message]%><%end%>
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/plants.scss" type="text/css">
+
+</head>
+<body>
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <%@plants.each do |plant|%>
 <%if plant.errors.any?%>
@@ -25,3 +35,5 @@
 </ul><%end%><br>
 <%if params[:user_id]%>
 <%=link_to 'Back to Owner', user_path(@user)%><%end%>
+
+</body></html>

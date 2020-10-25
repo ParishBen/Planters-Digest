@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <head>
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-body {
-background-color: lightblue;
-}
-</style>
+<link rel="stylesheet" href="stylesheets/plants.scss" type="text/css">
+
 </head>
+<body>
 
-
-<%if flash[:message]%> <%=flash[:message]%><%end%>
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
  
 
@@ -106,3 +103,4 @@ Plant Type: <%=@plant.plant_type%>
 <%=cf.submit%>
 <%end%><%end%><br>
 <%=link_to 'Back to Owner', user_path(@plant.user)%>
+</body></html>

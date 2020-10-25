@@ -1,15 +1,23 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
+
+</head>
+<body>
 <% if @user.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being edited.</h2>
-
-
-
-
 <% @user.errors.full_messages.each do |msg|%>
 <ul><li><%= msg %></li>
 </ul>
 </div>
 <%end%><%end%>
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
+
 <h1>Edit Your Profile!</h1>
 <%=form_for(@user) do |f|%>
 <%=f.label :name%>
@@ -23,3 +31,4 @@
 
 <%=f.submit%>
 <%end%>
+</body></html>

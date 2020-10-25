@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <head>
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-body {
-background-color: lightblue;
-}
-</style>
+<link rel="stylesheet" href="stylesheets/logs.scss" type="text/css">
 </head>
+<body>
 
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <h1><%if params[:plant_id]%><%=@plant.nickname%>'s Logs</h1><%else%>ALL LOGS</h1><%end%>
 
@@ -36,5 +34,4 @@ background-color: lightblue;
 <%else%>
 <h3>No Logs to date</h3>
 <%end%>
-
-
+</body></html>

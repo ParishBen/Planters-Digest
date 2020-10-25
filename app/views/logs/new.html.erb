@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/logs.scss" type="text/css">
+
+</head>
+<body>
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
+
 <% if @log.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@log.errors.count, "error") %> prohibited this Log from being saved.</h2>
@@ -31,3 +42,4 @@
 <br>
 
 <%=link_to 'Back to Profile', user_path(current_user)%>
+</body></html>

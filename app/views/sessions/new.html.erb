@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
+
+</head>
+<body>
 <h1>Please Login Below</h1>
 
 <%if flash[:message].present?%>
@@ -16,3 +22,5 @@
 <%= submit_tag "Submit"%>
 <%end%><%end%>
 <%=link_to "Back to Signup", '/'%>
+
+</body></html>

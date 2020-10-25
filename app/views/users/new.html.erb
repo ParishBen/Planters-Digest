@@ -1,10 +1,20 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
+
+</head>
+<body>
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
+
 <% if @user.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being saved.</h2>
 
-<ul>
 <% @user.errors.full_messages.each do |msg|%>
-<li><%= msg %></li>
+<ul><li><%= msg %></li>
 </ul>
 </div>
 <%end%><%end%>
@@ -23,3 +33,4 @@
 <%=f.submit%>
 <%end%>
 <%=link_to "Back to Login", '/'%>
+</body></html>

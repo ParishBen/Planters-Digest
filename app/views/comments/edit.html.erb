@@ -1,14 +1,24 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/comments.scss" type="text/css">
+
+</head>
+<body>
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
+
 <% if @comment.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being edited.</h2>
-
-
 <% @comment.errors.full_messages.each do |msg|%>
 <ul><li><%= msg %></li>
 </ul>
 </div>
 <%end%>
 <%end%>
+
 <h1> Edit Comment</h1>
 
 <%=form_for(@comment) do |f|%>
@@ -18,3 +28,4 @@
 <%=f.hidden_field :plant_id%>
 <%=f.submit%>
 <%end%>
+</body></html>

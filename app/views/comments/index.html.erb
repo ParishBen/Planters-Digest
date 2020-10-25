@@ -1,14 +1,26 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/comments.scss" type="text/css">
+
+</head>
+<body>
+
 <%@comments.each do |comment|%>
 <% if comment.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(comment.errors.count, "error") %> prohibited the comments view page from being shown.</h2>
-
 
 <% comment.errors.full_messages.each do |msg|%>
 <ul><li><%= msg %></li></ul>
 </div>
 <%end%><%end%>
 <%end%>
+<br>
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 <br>
 
 <%if @plant && @plant.comments.blank?%><h3>Plant: <%=link_to @plant.nickname, plant_path(@plant)%> Has No Comments. -- Owned by <%=link_to @plant.user.username, user_path(@plant.user)%></h3>
@@ -22,3 +34,4 @@
    </ul><%end%><%end%>
   
    <%if @plant%><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%>
+</body></html>

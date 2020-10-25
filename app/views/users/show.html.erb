@@ -1,19 +1,26 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
+
+</head>
+<body>
 <% if @user.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being updated.</h2>
 
-<ul>
 <% @user.errors.full_messages.each do |msg|%>
-<li><%= msg %></li>
+<ul><li><%= msg %></li>
 </ul>
 </div>
-<%end%>
-<%end%>
-<%if flash[:message]%><%=flash[:message]%><%end%>
+<%end%><%end%>
+
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <%if @user && @user == current_user%><h1>Hi <%=@user.name%>!</h1><%else%><h1><%=@user.name%>'s Page</h1><%end%>
-
-
 
 <%if @user == current_user%>
 <h3>Your Info:</h3><%else%> <h3>User Info:</h3><ul><%end%>
@@ -46,3 +53,4 @@
     <%if !logged_in?%>
     <p>Please <%=link_to "Sign Up", signup_path%> or <%=link_to "Log in", login_path%></p><%end%>
     <%if @user == current_user%><%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are You Sure You Want to Delete Account?" } %> <%end%>
+    </body></html>

@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="stylesheets/logs.scss" type="text/css">
+
+</head>
+<body>
+
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
+
 <% if @log.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@log.errors.count, "error") %> prohibited this log from being edited.</h2>
@@ -21,3 +33,6 @@
 <%=f.text_field :notes%>
 <%=f.submit%>
 <%end%>
+<br>
+<%=link_to "Back", plant_path(@log.plant)%>
+</body></html>
