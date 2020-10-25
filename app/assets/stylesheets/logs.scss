@@ -1,8 +1,10 @@
 // Place all the styles related to the Logs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-table, th, td {
+table.center, th, td {
     border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
   }
   th {  font-weight: bold;
   }
@@ -16,4 +18,5 @@ table, th, td {
 }
   body {
   background-color: lightblue;
+  text-align: center;
   }

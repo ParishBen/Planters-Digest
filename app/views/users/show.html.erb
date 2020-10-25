@@ -23,17 +23,12 @@
 <%if @user && @user == current_user%><h1>Hi <%=@user.name%>!</h1><%else%><h1><%=@user.name%>'s Page</h1><%end%>
 
 <%if @user == current_user%>
-<h3>Your Info:</h3><%else%> <h3>User Info:</h3><ul><%end%>
-   <li>Username: <%=@user.username%></li>
-    <li>Email: <%=@user.email%></li> 
-    <%if @user == current_user%><li><%=link_to "Edit Info", edit_user_path(current_user)%></li><%end%>
-</ul></p>
-<%# <%= button_to "Log Out", { action: "delete"}, method: :delete, data: { confirm: "Are you sure?" } %>
-    <%# <form method="post" action="sessions" class="button_to">
-      <input type="hidden" name="_method" value="delete" />
-      <input data-confirm='Are you sure?' value="Log Out" type="submit" />
-      <#input name="authenticity_token" type="hidden" value="10f2163b45388899ad4d5ae948988266befcb6c3d1b2451cf657a0c293d605a6"/>
-    </form>" %>
+<h3>Your Info:</h3><%else%> <h3>User Info:</h3><%end%>
+   <p>Username: <%=@user.username%><br>
+    Email: <%=@user.email%><br>
+    <%if @user == current_user%><%=link_to "Edit Info", edit_user_path(current_user)%><%end%>
+</p><br>
+
     <%if @user.plants.present? && @user == current_user%>
     
     <h3>Your Plants:</h3>

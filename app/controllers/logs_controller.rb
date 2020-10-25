@@ -15,7 +15,6 @@ class LogsController < ApplicationController
         redirect_if_not_logged_in
         @log = Log.new(log_params)
         @plant = Plant.find_by(id: @log.plant_id)
-        redirect_if_not_logged_in
         if @log.save
         redirect_to plant_path(@plant)
         else
@@ -45,7 +44,7 @@ class LogsController < ApplicationController
     def update
         redirect_if_not_logged_in
         @log = Log.find(params[:id])
-        @plant = Plant.find(params[:plant_id])
+        @plant = Plant.find_by(id: @log.plant_id)        
         plant_not_current_users
         @log.update(log_params)
         if @log.save
@@ -57,6 +56,7 @@ class LogsController < ApplicationController
     end
 
     def destroy
+        redirect_if_not_logged_in
         @log = Log.find_by(id: params[:id])
         if current_user.logs.include?(@log)
             @log.destroy
@@ -67,6 +67,7 @@ class LogsController < ApplicationController
     end
 
     def index
+        redirect_if_not_logged_in
        if params[:plant_id]
             @plant = Plant.find_by(id: params[:plant_id])
             @logs = @plant.logs

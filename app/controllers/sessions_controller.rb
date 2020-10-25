@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     end
 
     def google
-       @user = User.find_or_create_by(email: auth["info"]["email"])
+        @user = User.find_or_create_by(email: auth["info"]["email"])
         @user.username = auth["info"]["email"]
         @user.name = auth["info"]["first_name"] +" "+ auth["info"]["last_name"]
         @user.password = SecureRandom.hex(10)
