@@ -30,7 +30,7 @@
 
     <%if @plant && @plant.comments.present? || !params[:plant_id]%>
     <%@comments.each do |comment|%>
-    <ul><li><%=link_to comment.commenter.username, user_path(comment.commenter)%> says <%=comment.content%> <%if comment.commenter == current_user%><%=link_to "Edit", edit_comment_path(comment)%> -- <%=link_to 'Delete Log', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%>  <%if !@plant%>about <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</li><%end%>
+    <ul><li><%=link_to comment.commenter.username, user_path(comment.commenter)%> says <%=comment.content%>   <%if !@plant%> About <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</li><%if comment.commenter == current_user%><%=link_to "Edit", edit_comment_path(comment)%> -- <%=link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%><%end%>
    </ul><%end%><%end%>
   
    <%if @plant%><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%>
