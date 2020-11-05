@@ -28,7 +28,7 @@ class PlantsController < ApplicationController
         if @user = User.find_by(id: params[:user_id])
           @plants = @user.plants.popular
         else
-          @plants = Plant.popular
+          @plants = Plant.search(params[:search]).popular
        end   
     end
 
@@ -89,6 +89,6 @@ class PlantsController < ApplicationController
     
     private
     def plant_params
-        params.require(:plant).permit(:id, :nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:condition_update, :notes, :water_date, :plant_id])   
+        params.require(:plant).permit(:search, :nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:condition_update, :notes, :water_date, :plant_id])   
     end
 end

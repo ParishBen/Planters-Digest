@@ -30,6 +30,13 @@
 
 <%else%>
     <h1>ALL PLANTS!</h1><%end%>
+
+    <%= form_tag plants_path, :method => "get" do%>
+        <%=label_tag(:search, "Search By Type") %>
+        <%=text_field_tag :search, params[:search] %>
+        <%=submit_tag("Search", :name => nil) %>
+        <%end%>
+
 <%@plants.each do |plant|%>
 <ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)%><%if !params[:user_id]%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li><%end%>
 </ul><%end%><br>

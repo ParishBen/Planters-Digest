@@ -10,4 +10,16 @@ class Plant < ApplicationRecord
 
     scope :popular, -> {Plant.left_joins(:comments).group('plants.id').order('count(comments.plant_id) desc')}
  
+    def self.search(search)
+        if search
+            plant_type = Plant.find_by(plant_type: search)
+            if plant_type
+                self.where(plant_type: plant_type.plant_type)
+            else
+                @plants = Plant.all
+            end
+        else
+            @plants = Plant.all
+        end
+    end
 end
