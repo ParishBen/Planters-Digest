@@ -1,7 +1,7 @@
 class LogsController < ApplicationController
+    before_action :redirect_if_not_logged_in, :set_plant, only: [:edit, :update, :show]
     include UsersHelper
     def new
-        redirect_if_not_logged_in
         @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
         if params[:plant_id]
             @log = Plant.find_by(id: params[:plant_id]).logs.build
@@ -12,7 +12,6 @@ class LogsController < ApplicationController
     end
 
     def create
-        redirect_if_not_logged_in
         @log = Log.new(log_params)
         @plant = Plant.find_by(id: @log.plant_id)
         if @log.save
@@ -25,30 +24,18 @@ class LogsController < ApplicationController
     end
     
     def show
-        redirect_if_not_logged_in
-        @log = Log.find(params[:id])
-        @plant = Plant.find_by(id: @log.plant_id)
         flash[:message]= "Directed To Log's Plant Page"
         redirect_to plant_path(@plant)
     end
    
     
     def edit
-        redirect_if_not_logged_in
         @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
-        @log = Log.find_by(id: params[:id])
-        @plant = Plant.find_by(id: @log.plant_id)        
-        plant_not_current_users
     end
 
     def update
-        redirect_if_not_logged_in
-        @log = Log.find(params[:id])
-        @plant = Plant.find_by(id: @log.plant_id)        
-        plant_not_current_users
-        @log.update(log_params)
-        if @log.save
-            redirect_to plant_path(@log.plant)
+        if @log.update(log_params)
+          redirect_to plant_path(@log.plant)
         else 
             @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
             render :edit
@@ -56,7 +43,6 @@ class LogsController < ApplicationController
     end
 
     def destroy
-        redirect_if_not_logged_in
         @log = Log.find_by(id: params[:id])
         if current_user.logs.include?(@log)
             @log.destroy
@@ -67,7 +53,6 @@ class LogsController < ApplicationController
     end
 
     def index
-        redirect_if_not_logged_in
        if params[:plant_id]
             @plant = Plant.find_by(id: params[:plant_id])
             @logs = @plant.logs
@@ -80,5 +65,10 @@ class LogsController < ApplicationController
 
     def log_params
         params.require(:log).permit(:water_date, :notes, :plant_id, :condition_update)
+    end
+
+    def set_plant
+        @log =  @log = Log.find_by(id: params[:id])
+        @plant = Plant.find_by(id: @log.plant_id)        
     end
 end

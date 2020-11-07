@@ -1,17 +1,16 @@
 class PlantsController < ApplicationController
     include UsersHelper
-    
+    before_action :redirect_if_not_logged_in, :set_plant, only: [ :show, :edit, :create, :update]
     def show
-      redirect_if_not_logged_in
         @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
-        @log = Log.new
-        @comment = Comment.new
+        @log = @plant.logs.build
+        @comment = @plant.comments.build
         @comment.commenter_id = current_user.id
           if !params[:user_id]
-            @plant = Plant.find_by(id: params[:id])
+             set_plant
           elsif params[:user_id]
             @user = User.find_by(id: params[:user_id]) 
-            @plant = Plant.find_by(id: params[:id])
+            set_plant
           if params[:user_id] && @user.plants.include?(@plant)
             render :show
           else
@@ -22,35 +21,23 @@ class PlantsController < ApplicationController
       end
     end
 
-
     def index
-        redirect_if_not_logged_in
         if @user = User.find_by(id: params[:user_id])
           @plants = @user.plants.popular
-        else
+        elsif params[:search]
           @plants = Plant.search(params[:search]).popular
+        else 
+          @plants = Plant.popular
        end   
     end
 
     def edit
-      redirect_if_not_logged_in
-      @plant = Plant.find_by(id: params[:id])
       @user = @plant.user
       not_current_user
     end
             
     def update
-      redirect_if_not_logged_in
-      @plant = Plant.find(params[:id])  
-            
-      @plant.update(plant_params)
-      if @plant.save
-          redirect_to plant_path(@plant)
-      elsif params[:plant][:comments_attributes] && params[:plant][:comments_attributes][:"0"][:content].blank?
-          flash[:message] = "Comment field must be filled out"
-          redirect_to plant_path(@plant)
-      elsif params[:plant][:logs_attributes] && params[:plant][:logs_attributes][:"0"][:water_date].blank?
-          flash[:message] = "Logs must have Water Date & Condition Update."
+      if @plant.update(plant_params)
           redirect_to plant_path(@plant)
       else 
           flash[:message]= "Comment's field cannot be empty."
@@ -59,12 +46,10 @@ class PlantsController < ApplicationController
      end
 
     def new
-      redirect_if_not_logged_in
         @plant = Plant.new        
     end
 
     def create
-      redirect_if_not_logged_in
         @plant = Plant.new(plant_params)
         @plant.user_id = current_user.id
         if @plant.save
@@ -76,7 +61,6 @@ class PlantsController < ApplicationController
     end
 
         def destroy
-          redirect_if_not_logged_in
             @plant = Plant.find(params[:id])
             plant_not_current_users
             if @plant.destroy
@@ -89,6 +73,10 @@ class PlantsController < ApplicationController
     
     private
     def plant_params
-        params.require(:plant).permit(:search, :nickname, :plant_type, :user_id, comments_attributes:[:content, :plant_id, :commenter_id], logs_attributes:[:condition_update, :notes, :water_date, :plant_id])   
+        params.require(:plant).permit( :search, :nickname, :plant_type, :user_id)   
     end
+    def set_plant
+      @plant = Plant.find_by(id: params[:id])
+    end
+ 
 end

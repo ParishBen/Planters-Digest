@@ -65,23 +65,23 @@ Plant Type: <%=@plant.plant_type%>
 <br>
 
 <%if @plant.user == current_user%>
-
-<%=form_for(@plant) do |f|%>
-<%=f.fields_for :logs, @plant.logs.build do |lf|%>
-<%=lf.hidden_field :plant_id %>
-<%=lf.label :water_date%>
-<%=lf.date_field :water_date%>
-<%=lf.label :notes%>
-<%=lf.text_field :notes%>
-<%=lf.label :condition_update%>
-<%=lf.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
+<%#refactor%>
+<%=form_for(@log) do |f|%>
+<%#=f.fields_for :logs, @plant.logs.build do |f|%>
+<%=f.hidden_field :plant_id %>
+<%=f.label :water_date%>
+<%=f.date_field :water_date%>
+<%=f.label :notes%>
+<%=f.text_field :notes%>
+<%=f.label :condition_update%>
+<%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
 <br><br> 
 
 
-<%=lf.submit%>
+<%=f.submit%>
 <%end%>
 <%end%>
-<%end%>
+<%#end%>
 
 <%if @plant.comments.present?%>
 <h3>Comments on <%=@plant.nickname%>:</h3>
@@ -93,14 +93,14 @@ Plant Type: <%=@plant.plant_type%>
 <h3>No Comments Yet:</h3>
 <%end%>
 
-
-<%= form_for(@plant) do |f|%>
-<%=f.fields_for :comments, @comment do |cf|%> 
-<%=cf.hidden_field :plant_id %>
-<%=cf.hidden_field :commenter_id %>
-<%=cf.label :content, 'Add a Comment:'%>
-<%=cf.text_area :content %>
-<%=cf.submit%>
-<%end%><%end%><br>
+<%#refactor%>
+<%= form_for(@comment) do |f|%>
+<%#=f.fields_for :comments, @comment do |f|%> 
+<%=f.hidden_field :plant_id %>
+<%=f.hidden_field :commenter_id %>
+<%=f.label :content, 'Add a Comment:'%>
+<%=f.text_area :content %>
+<%=f.submit%>
+<%end%><%#end%><br>
 <%=link_to 'Back to Owner', user_path(@plant.user)%>
 </body></html>

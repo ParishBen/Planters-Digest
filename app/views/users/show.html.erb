@@ -15,11 +15,6 @@
 <%end%><%end%>
 
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
-
 <%if @user && @user == current_user%><h1>Hi <%=@user.name%>!</h1><%else%><h1><%=@user.name%>'s Page</h1><%end%>
 
 <%if @user == current_user%>

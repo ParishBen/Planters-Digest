@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
-   include UsersHelper
-
+    before_action :redirect_if_not_logged_in
+    include UsersHelper
     def index 
-        redirect_if_not_logged_in
         if params[:plant_id]
             @plant = Plant.find_by(id: params[:plant_id])
             @comments = @plant.comments
@@ -13,16 +12,13 @@ class CommentsController < ApplicationController
     end
 
     def new
-        redirect_if_not_logged_in
         @comment = Comment.new
         if params[:plant_id]
-             @plant = Plant.find_by(id: params[:plant_id])
-             @comment = @plant.comments.build
+             @comment = Plant.find_by(id: params[:plant_id]).comments.build
         end
     end
 
     def create
-        redirect_if_not_logged_in
         @comment = Comment.new(comment_params)
         @plant = Plant.find_by(id: @comment.plant_id)
         @comment.commenter_id = current_user.id
@@ -35,17 +31,14 @@ class CommentsController < ApplicationController
     end
 
     def edit
-        redirect_if_not_logged_in
         @comment = Comment.find(params[:id])
         not_the_commenter
     end
 
     def update
-        redirect_if_not_logged_in
         @comment = Comment.find(params[:id])
         not_the_commenter
-        @comment.update(comment_params)
-        if @comment.save
+         if @comment.update(comment_params)
             redirect_to plant_path(@comment.plant)
         else 
             flash[:message]= "Please ensure content is not empty." 
@@ -54,17 +47,15 @@ class CommentsController < ApplicationController
     end
 
     def show
-        redirect_if_not_logged_in
         @comment = Comment.find(params[:id])
         flash[:message]= "Directed To Comment's Plant Page"
         redirect_to plant_path(@comment.plant)
         end
 
     def destroy
-        redirect_if_not_logged_in
         @comment = Comment.find(params[:id])
         not_the_commenter
-        if @comment.destroy
+          if @comment.destroy
             redirect_to plant_path(@comment.plant)
         end
     end

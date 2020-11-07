@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+    before_action :redirect_if_not_logged_in, only: [:edit, :update, :show, :index, :destroy]
     include UsersHelper
+
     def welcome
         if !logged_in?
            render :welcome
@@ -9,19 +11,17 @@ class UsersController < ApplicationController
     end
     
     def edit
-        redirect_if_not_logged_in
+        
         @user = User.find(params[:id])
         not_current_user
     end
 
     def update
-        redirect_if_not_logged_in
         @user = User.find(params[:id])
         not_current_user
-        @user.update(user_params)
-        if @user.save
+          if @user.update(user_params)
             redirect_to user_path(@user)
-        else 
+          else 
             flash[:message]="Please fill out all fields"
             render :edit
         end
@@ -44,12 +44,10 @@ class UsersController < ApplicationController
     end
 
     def index
-        redirect_if_not_logged_in
         @users = User.most_plants
     end
 
     def show
-        redirect_if_not_logged_in
         @user = User.find_by(id: params[:id])     
     end
 
