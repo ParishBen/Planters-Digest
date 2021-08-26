@@ -7,26 +7,26 @@
 
 
  
-
+<div id = 'divbody'>
 <% if @plant && @plant.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</h2>
 <% @plant.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li></div>
+<ul><li><%= msg %></li></ul></div>
 <%end%><%end%>
 
 <%if @comment && @comment.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</h2>
 <% @comment.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li></div>
+<ul><li><%= msg %></li></ul></div>
 <%end%><%end%>
 
 <%if @log && @log.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</h2>
 <% @log.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li></div>
+<ul><li><%= msg %></li></ul></div>
 <%end%><%end%>
 
 <%if flash[:message].present?%>
@@ -60,8 +60,9 @@ Plant Type: <%=@plant.plant_type%>
 <td> <%= log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></td><%end%>
 </tr>
 
-<%end%><%end%>
+<%end%>
 </table>
+<%end%>
 <br>
 
 <%if @plant.user == current_user%>

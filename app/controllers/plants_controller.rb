@@ -1,8 +1,13 @@
 class PlantsController < ApplicationController
     include UsersHelper
     before_action :redirect_if_not_logged_in, :set_plant, only: [ :show, :edit, :create, :update]
+    
     def show
-        @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
+      @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
+      if !@plant
+        flash[:message] = "SORRY, NOT A PLANT!"
+        redirect_to plants_path
+      elsif @plant
         @log = @plant.logs.build
         @comment = @plant.comments.build
         @comment.commenter_id = current_user.id
@@ -19,13 +24,19 @@ class PlantsController < ApplicationController
           end
         end
       end
+     end
     end
 
     def index
+      @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
         if @user = User.find_by(id: params[:user_id])
           @plants = @user.plants.popular
         elsif params[:search]
           @plants = Plant.search(params[:search]).popular
+        elsif @plants
+          @log = @plants.find(plant.id).logs.build
+          @comment = @plants.find(plant.id).comments.build
+          @comment.commenter_id = current_user.id
         else 
           @plants = Plant.popular
        end   

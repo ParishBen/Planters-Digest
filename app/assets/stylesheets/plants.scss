@@ -20,4 +20,13 @@ label {
 body {
 background-color: lightblue;
 text-align: center;
+list-style-position:inside;
+}
+
+#divbody {
+  border: 2pt solid blue;
+}
+#comments {
+  border-bottom: 2pt solid blue;
+  border-bottom-width: 100%
 }

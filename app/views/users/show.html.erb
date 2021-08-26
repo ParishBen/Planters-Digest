@@ -6,7 +6,7 @@
 <body>
 <% if @user.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being updated.</h2>
+<h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being updated:</h2>
 
 <% @user.errors.full_messages.each do |msg|%>
 <ul><li><%= msg %></li>
@@ -14,6 +14,10 @@
 </div>
 <%end%><%end%>
 
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
 
 <%if @user && @user == current_user%><h1>Hi <%=@user.name%>!</h1><%else%><h1><%=@user.name%>'s Page</h1><%end%>
 
