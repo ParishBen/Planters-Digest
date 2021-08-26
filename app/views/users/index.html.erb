@@ -4,6 +4,11 @@
 
 </head>
 <body>
+<%if flash[:message].present?%>
+<div id="error_explanation">
+<%= flash[:message] %>
+</div><%end%>
+
 <h1>All Users Pages</h1>
 
 <%@users.each do |user|%>

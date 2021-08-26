@@ -49,6 +49,10 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])     
+        if !@user
+            flash[:message] = "Sorry not a User!"
+            redirect_to users_path
+        end
     end
 
     private

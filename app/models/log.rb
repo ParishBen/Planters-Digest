@@ -3,3 +3,4 @@ class Log < ApplicationRecord
     validates :water_date, :condition_update, presence: true
     
 end
+

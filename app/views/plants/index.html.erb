@@ -4,43 +4,115 @@
 
 </head>
 <body>
+<div id='divbody'>
+<h1>MEOWSKIS</h1>
+<%# <%plants.each do |plant|%>
+<%# <%if plant.errors.any?%>
+<%# <div id="error_explanation"> %>
+<%# <h2><%= pluralize(plant.errors.count, "error") prohibited this Plants' View from being shown.</h2> %> 
 
 
-<%@plants.each do |plant|%>
-<%if plant.errors.any?%>
-<div id="error_explanation">
-<h2><%= pluralize(plant.errors.count, "error") %> prohibited this Plants' View from being shown.</h2>
+<%# <% plant.errors.full_messages.each do |msg|%> 
+<%# <ul><li><%= msg %></li> 
+<%# </ul> %>
+<%# </div> %>
+<%# <%end%><%#end %> 
+<%# <%end%> 
+<%#  %>
+<%# <%if flash[:message].present?%>
+<%# <div id="error_explanation"> %>
+<%# <%= flash[:message] %> 
+<%# </div><%end%> 
+
+<%# <%if params[:user_id]%> 
+<%# <h1><%=@user.username<#% 's Plants</h1> %>
 
 
-<% plant.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
-</ul>
-</div>
-<%end%><%end%>
+<%# <%else%> 
+    <%# <h1>ALL PLANTS!</h1><%end%> 
+
+     <%= form_tag plants_path, :method => "get" do%>  
+         <%=label_tag(:search, "Search By Type") %> 
+         <%=text_field_tag :search, params[:search] %> 
+         <%=submit_tag("Search", :name => nil) %> 
+         <%end %>
+
+
+
+ <%@plants.each do |plant|%> 
+<%if plant%>                             
+<h1>Plant <%=plant.nickname%>'s Page</h1>
+Nickname: <%=plant.nickname%> <br>
+Plant Type: <%=plant.plant_type%>
+<%end%> 
+
+
+<%if plant.logs.present?%>
+<h3><%=plant.nickname%>'s Care Logs:</h3>
+
+<table class="center">
+  <tr>
+        <th>Water Date</th>
+        <th>Condition</th>
+        <th>Notes</th>
+ </tr>
+
+
+
+<%plant.logs.each do |log|%>
+<tr>
+<td> <%= log.water_date.strftime("%m/%d/%Y")%></td>
+<td> <%= log.condition_update%></td>
+<td> <%= log.notes%><%if plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></td><%end%>
+</tr>
+
 <%end%>
+</table>
+<%end%>
+<br>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
+<%if plant.user == current_user%>
+<%#refactor%>
+<%=form_for(plant.logs.build) do |f|%>
+<%#=f.fields_for :logs, plant.logs.build do |f|%>
+ <%=f.hidden_field :plant_id %> 
+ <%=f.label :water_date%> 
+ <%=f.date_field :water_date%> 
+ <%=f.label :notes%> 
+ <%=f.text_field :notes%> 
+ <%=f.label :condition_update%> 
+ <%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%> 
+ <%=f.submit%> 
+<br><br> 
+ <%end%> 
+<%end%>
+<%#end%>
+<div id='comments'>
+<%if plant.comments.present?%>
+<h3>Comments on <%=plant.nickname%>:</h3>
+<%plant.comments.each do |comment|%><ul><li>
+ <%=link_to comment.commenter.username, user_path(comment.commenter)%> says: 
+<%=comment.content%><%if comment.commenter == current_user%> | <%=link_to 'Edit', edit_comment_path(comment)%> | <%=link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%>
+ </li> 
+</ul><%end%><%else%>
+<h3>No Comments Yet:</h3>
+<%end%>
+<%#refactor%>
+<%#=f.fields_for :comments, @comment do |f|%> 
+ <%= form_for(plant.comments.build) do |f|%> 
+ <%=f.hidden_field :plant_id %> 
+ <%=f.hidden_field :commenter_id %> 
+ <%=f.label :content, 'Add a Comment:'%> 
+ <%=f.text_area :content %> 
+ <%=f.submit%> 
+<%end%></div>
+<%end%><br>
+</div>
+<%#=link_to 'Back to Owner', user_path(plant.user)%>
+<%#<li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> <%#--- Type: <%=plant.plant_type --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)<%if !params[:user_id] --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li><%#end%>
+<%# <%end%><br> 
+<%# <%if params[:user_id]%> 
+<%# <%=link_to 'Back to Owner', user_path(@user)%><%#end %>
 
-<%if params[:user_id]%>
-<h1><%=@user.username%>'s Plants</h1>
-
-
-<%else%>
-    <h1>ALL PLANTS!</h1><%end%>
-
-    <%= form_tag plants_path, :method => "get" do%>
-        <%=label_tag(:search, "Search By Type") %>
-        <%=text_field_tag :search, params[:search] %>
-        <%=submit_tag("Search", :name => nil) %>
-        <%end%>
-
-<%@plants.each do |plant|%>
-<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)%><%if !params[:user_id]%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li><%end%>
-</ul><%end%><br>
-<%if params[:user_id]%>
-<%=link_to 'Back to Owner', user_path(@user)%><%end%>
 
 </body></html>
