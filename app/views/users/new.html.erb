@@ -4,7 +4,6 @@
 
 </head>
 <body>
-
 <% if @user.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being saved.</h2>
@@ -20,8 +19,8 @@
 <%= flash[:message] %>
 </div><%end%>
 
-<h1>Create a Profile!</h1>
-<%=form_for(@user) do |f|%>
+<h1><span id='main'>Create a Profile!</span></h1>
+<%=form_for(@user) do |f|%><span id='main'>
 <%=f.label :name%>
 <%=f.text_field :name%><br>
 <%=f.label :username%>
@@ -31,7 +30,7 @@
 <%=f.label :password%>
 <%=f.password_field :password%><br>
 
-<%=f.submit%>
+<%=f.submit%></span>
 <%end%>
-<%=link_to "Back to Login", '/'%>
+<span id='main'><%=link_to "Back to Login", '/'%></span>
 </body></html>

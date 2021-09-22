@@ -4,10 +4,10 @@
 
 </head>
 <body>
-<h1>All Users Pages</h1>
+<h1><span id='main'>All Users Pages</span></h1>
 
 <%@users.each do |user|%>
 
 
-<ul><li><%=link_to user.username, user_path(user)%>- Plant Count: <%=link_to user.plants.size, user_plants_path(user)%></li></ul><%end%>
+<ul><li><span id='main'><%=link_to user.username, user_path(user)%>- Plant Count: <%=link_to user.plants.size, user_plants_path(user)%></span></li></ul><%end%>
 </body></html>

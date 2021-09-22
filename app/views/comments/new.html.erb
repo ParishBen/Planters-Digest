@@ -5,7 +5,6 @@
 </head>
 <body>
 
-
 <% if @comment.errors.any?%>
 <div id="error_explanation">
 <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved.</h2>
@@ -22,16 +21,16 @@
 <%= flash[:message] %>
 </div><%end%>
 
-<h1> Create a Comment</h1>
+<h1><span id='main'> Create a Comment</span></h1>
 
-<%=form_for(@comment) do |f|%>
+<%=form_for(@comment) do |f|%> <span id='main'>
 <%=f.label :content%>
 <%=f.text_area :content%>
 <%=f.hidden_field :commenter_id%>
 <%=f.hidden_field :plant_id%>
-<%=f.submit%>
+<%=f.submit%></span>
 <%end%>
 
 <br>
-<%=link_to "Back to Profile", user_path(current_user)%>
+<span id='main'><%=link_to "Back to Profile", user_path(current_user)%></span>
 </body></html>

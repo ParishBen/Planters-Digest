@@ -28,18 +28,18 @@
 <%end%><%end%>
 
 <%if flash[:message].present?%>
-<div id="error_explanation">
+<span id="error_explanation">
 <%= flash[:message] %>
 </div><%end%>
 
-<h1>Edit <%=@plant.nickname%></h1>
-<%=form_for(@plant) do |f|%>
+<h1><span id='main'>Edit <%=@plant.nickname%></span></h1>
+<%=form_for(@plant) do |f|%><span id='main'>
 <%=f.label :plant_type%>
 <%=f.text_field :plant_type%><br>
 <%=f.label :nickname%>
 <%=f.text_field :nickname%><br>
-<%=f.submit%>
+<%=f.submit%></span>
 <%end%><br>
-<%=link_to "Back to #{@plant.nickname}", plant_path(@plant)%>
+<span id='main'><%=link_to "Back to #{@plant.nickname}", plant_path(@plant)%></span>
 
 </body></html>

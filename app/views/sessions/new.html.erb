@@ -4,7 +4,7 @@
 
 </head>
 <body>
-<h1>Please Login Below</h1>
+<h1><span id='main'>Please Login Below</span></h1>
 
 <%if flash[:message].present?%>
 <div id="error_explanation">
@@ -12,15 +12,15 @@
 </div><%end%>
 
 
-<%if !logged_in?%>
+<%if !logged_in?%><span id='main'>
 <%=form_tag sessions_path do%>
 <%=label_tag :username%>
 <%=text_field_tag :username%><br>
 <%=label_tag :password%>
 <%=password_field_tag :password%><br>
 
-<%= submit_tag "Submit"%>
+<%= submit_tag "Submit"%></span>
 <%end%><%end%>
-<%=link_to "Back to Signup", '/'%>
+<span id='main'><%=link_to "Back to Signup", '/'%></span>
 
 </body></html>

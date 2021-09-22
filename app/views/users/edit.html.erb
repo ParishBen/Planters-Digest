@@ -18,8 +18,8 @@
 <%= flash[:message] %>
 </div><%end%>
 
-<h1>Edit Your Profile!</h1>
-<%=form_for(@user) do |f|%>
+<h1><span id='main'>Edit Your Profile!</span></h1>
+<%=form_for(@user) do |f|%><span id='main'>
 <%=f.label :name%>
 <%=f.text_field :name%><br>
 <%=f.label :username%>
@@ -29,6 +29,6 @@
 <%=f.label :password%>
 <%=f.password_field :password%><br>
 
-<%=f.submit%>
+<%=f.submit%></span>
 <%end%>
 </body></html>

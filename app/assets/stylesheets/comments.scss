@@ -10,7 +10,17 @@
   label {
     font-weight: bold;
 }
+#main{
+  background-color:rgba(9, 206, 25, 0.767);
+}
+ul {
+  list-style-type: none;
+}
   body {
+    background-image: url("https://media.istockphoto.com/vectors/collection-of-different-decor-house-indoor-garden-plants-in-pots-and-vector-id1009948020?k=20&m=1009948020&s=612x612&w=0&h=7nZvIu9FIl7gWnW9ttep8Hq1xR1yTxj1WkCDFWiy7xk=");
+    background-repeat:no-repeat;
+    background-size:contain;
+
     text-align: center;
-  background-color: lightblue;
+  //background-color: lightblue;
   }

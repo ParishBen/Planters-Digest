@@ -19,13 +19,13 @@
 <div id="error_explanation">
 <%= flash[:message] %>
 </div><%end%>
-<h1> Edit Comment</h1>
+<h1><span id='main'> Edit Comment</span></h1>
 
-<%=form_for(@comment) do |f|%>
+<%=form_for(@comment) do |f|%> <span id='main'>
 <%=f.label :content%>
 <%=f.text_area :content%>
 <%=f.hidden_field :commenter_id%>
 <%=f.hidden_field :plant_id%>
-<%=f.submit%>
+<%=f.submit%></span>
 <%end%>
 </body></html>

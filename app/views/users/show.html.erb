@@ -4,43 +4,44 @@
 
 </head>
 <body>
+
 <% if @user.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being updated.</h2>
+<h2><span id='main'><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being updated.</span></h2>
 
 <% @user.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%><%end%>
 
 
-<%if @user && @user == current_user%><h1>Hi <%=@user.name%>!</h1><%else%><h1><%=@user.name%>'s Page</h1><%end%>
+<%if @user && @user == current_user%><h1><span id='main'>Hi <%=@user.name%>!</span></h1><%else%><h1><span id='main'><%=@user.name%>'s Page</span></h1><%end%>
 
 <%if @user == current_user%>
-<h3>Your Info:</h3><%else%> <h3>User Info:</h3><%end%>
-   <p>Username: <%=@user.username%><br>
+<h3><span id='main'>Your Info:</span></h3><%else%> <span id='main'><h3>User Info:</h3><%end%></span>
+   <p><span id='main'>Username: <%=@user.username%><br>
     Email: <%=@user.email%><br>
     <%if @user == current_user%><%=link_to "Edit Info", edit_user_path(current_user)%><%end%>
-</p><br>
+</span></p><br>
 
     <%if @user.plants.present? && @user == current_user%>
     
-    <h3>Your Plants:</h3>
+    <h3><span id='main'>Your Plants:</span></h3>
      <%@user.plants.each do |plant|%>
-    <ul><li><%=link_to plant.nickname, plant_path(plant)%> the <%=plant.plant_type%>--<%=link_to "Edit #{plant.nickname}", edit_plant_path(plant)%>--<%=link_to "Delete #{plant.nickname}", plant_path(plant), method: :delete, data: {confirm: "Are You Sure?"} %> </li></ul><%end%>
-    <%elsif @user != current_user && @user.plants.present?%> <h3>Plants:</h3>    
+    <ul><li><span id='main'><%=link_to plant.nickname, plant_path(plant)%> the <%=plant.plant_type%>--<%=link_to "Edit #{plant.nickname}", edit_plant_path(plant)%>--<%=link_to "Delete #{plant.nickname}", plant_path(plant), method: :delete, data: {confirm: "Are You Sure?"} %> </span></li></ul><%end%>
+    <%elsif @user != current_user && @user.plants.present?%> <span id='main'><h3>Plants:</h3>  </span>  
     <%@user.plants.each do |plant|%>
-    <ul><li><%=link_to plant.nickname, plant_path(plant)%> the <%=plant.plant_type%></li></ul><%end%>
+    <ul><li><span id='main'><%=link_to plant.nickname, plant_path(plant)%> the <%=plant.plant_type%></span></li></ul><%end%>
     <br><%else%> <%@user.plants.empty?%>
-    <h3>No Plants Yet</h3>
+    <h3><span id='main'>No Plants Yet</span></h3>
     <%end%>
    
     <br><br>
 
    <%if  current_user==@user%>
-    <%= button_to "Log Out", logout_path, :method => :delete, data: {confirm: "Please Confirm to Logout"}%><%end%>
+    <span id='main'><%= button_to "Log Out", logout_path, :method => :delete, data: {confirm: "Please Confirm to Logout"}%><%end%>
     <%if !logged_in?%>
     <p>Please <%=link_to "Sign Up", signup_path%> or <%=link_to "Log in", login_path%></p><%end%>
     <%if @user == current_user%><%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are You Sure You Want to Delete Account?" } %> <%end%>
-    </body></html>
+    </span></body></html>

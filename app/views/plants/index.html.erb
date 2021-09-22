@@ -5,7 +5,6 @@
 </head>
 <body>
 
-
 <%@plants.each do |plant|%>
 <%if plant.errors.any?%>
 <div id="error_explanation">
@@ -25,22 +24,22 @@
 </div><%end%>
 
 <%if params[:user_id]%>
-<h1><%=@user.username%>'s Plants</h1>
+<h1><span id='main'><%=@user.username%>'s Plants</span></h1>
 
 
 <%else%>
-    <h1>ALL PLANTS!</h1><%end%>
+    <h1><span id='main'>ALL PLANTS!</span></h1><%end%>
 
-    <%= form_tag plants_path, :method => "get" do%>
+    <span id='main'><%= form_tag plants_path, :method => "get" do%>
         <%=label_tag(:search, "Search By Type") %>
         <%=text_field_tag :search, params[:search] %>
         <%=submit_tag("Search", :name => nil) %>
-        <%end%>
+        <%end%></span>
 
 <%@plants.each do |plant|%>
-<ul><li> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)%><%if !params[:user_id]%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></li><%end%>
+<ul><li><span id='main'> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)%><%if !params[:user_id]%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></span></li><%end%>
 </ul><%end%><br>
 <%if params[:user_id]%>
-<%=link_to 'Back to Owner', user_path(@user)%><%end%>
+<span id='main'><%=link_to 'Back to Owner', user_path(@user)%><%end%></span>
 
 </body></html>
