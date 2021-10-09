@@ -8,11 +8,11 @@
 <%@plants.each do |plant|%>
 <%if plant.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(plant.errors.count, "error") %> prohibited this Plants' View from being shown.</h2>
+<h2><span id='main'><%= pluralize(plant.errors.count, "error") %> prohibited this Plants' View from being shown.</span></h2>
 
 
 <% plant.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%><%end%>
@@ -20,7 +20,7 @@
 
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 
 <%if params[:user_id]%>
@@ -30,11 +30,11 @@
 <%else%>
     <h1><span id='main'>ALL PLANTS!</span></h1><%end%>
 
-    <span id='main'><%= form_tag plants_path, :method => "get" do%>
-        <%=label_tag(:search, "Search By Type") %>
+    <div id='form'><%= form_tag plants_path, :method => "get" do%>
+        <span id='beige'><%=label_tag(:search, "Search By Type") %></span>
         <%=text_field_tag :search, params[:search] %>
         <%=submit_tag("Search", :name => nil) %>
-        <%end%></span>
+        <%end%></div>
 
 <%@plants.each do |plant|%>
 <ul><li><span id='main'> Nickname: <%=link_to plant.nickname, plant_path(plant)%> --- Type: <%=plant.plant_type%> --- Comments: <%=link_to plant.comments.size, plant_comments_path(plant)%><%if !params[:user_id]%> --- Owner: <%=link_to plant.user.username, user_path(plant.user)%></span></li><%end%>

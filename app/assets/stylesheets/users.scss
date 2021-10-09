@@ -12,7 +12,13 @@
   }
  
   #main{
-    background-color:rgba(9, 206, 25, 0.767);
+    background-color:rgba(9, 206, 25, 0.9767);
+    border-radius:7px;
+    border: 2pt solid black;
+  }
+  #main:any-link:hover{
+    background-color:chartreuse;
+    font-weight:bolder;
   }
  
   body {

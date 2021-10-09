@@ -9,14 +9,14 @@
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being saved.</h2>
 
 <% @user.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%><%end%>
 
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 
 <h1><span id='main'>Create a Profile!</span></h1>

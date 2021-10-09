@@ -5,7 +5,7 @@
 <body>
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 
 <h1><span id='main'><%if params[:plant_id]%><%=@plant.nickname%>'s Logs</h1><%else%>ALL LOGS</span></h1><%end%>

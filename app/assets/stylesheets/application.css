@@ -15,4 +15,34 @@
  */
  #user{
     background-color:rgba(9, 206, 25, 0.767);
+    border:3px solid burlywood;
+    padding: 3pt;
+    
   }
+  /* #user:hover {
+    background-color: chartreuse;
+  } */
+#add_plant:hover{
+  background-color: chartreuse;
+  font-weight:bolder;
+}
+#add_log:hover{
+  background-color: chartreuse;
+  font-weight:bolder;
+}
+#profile:hover{
+  background-color: chartreuse;
+  font-weight:bolder;
+}
+#popular_users:hover{
+  background-color: chartreuse;
+  font-weight:bolder;
+}
+#popular_plants:hover{
+  background-color: chartreuse;
+  font-weight: bolder;
+}
+#logout:hover{
+  background-color: chartreuse;
+  font-weight:bolder;
+}

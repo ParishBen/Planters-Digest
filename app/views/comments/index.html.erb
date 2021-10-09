@@ -7,10 +7,10 @@
 <%@comments.each do |comment|%>
 <% if comment.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(comment.errors.count, "error") %> prohibited the comments view page from being shown.</h2>
+<h2><span id='main'><%= pluralize(comment.errors.count, "error") %> prohibited the comments view page from being shown.</span></h2>
 
 <% comment.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li></ul>
+<ul><li><span id='main'><%= msg %></span></li></ul>
 </div>
 <%end%><%end%>
 <%end%>
@@ -18,7 +18,7 @@
 
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 <br>
 
@@ -29,8 +29,9 @@
 
     <%if @plant && @plant.comments.present? || !params[:plant_id]%>
     <%@comments.each do |comment|%>
-    <ul><li><span id='main'><%=link_to comment.commenter.username, user_path(comment.commenter)%> says <%=comment.content%>   <%if !@plant%> About <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</span></li><%if comment.commenter == current_user%><%=link_to "Edit", edit_comment_path(comment)%> -- <%=link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%><%end%>
+    <ul><li><span id='main'><%=link_to comment.commenter.username, user_path(comment.commenter)%> : <span style='border: 1px solid black'><%=comment.content%><%if comment.commenter == current_user%> | <%=link_to "Edit", edit_comment_path(comment)%> | <%=link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%></span>  
+     <%if !@plant%> About <%=link_to comment.plant.nickname, plant_path(comment.plant)%>, The <%=comment.plant.plant_type%> Plant.</span></li><%end%>
    </ul><%end%><%end%>
   
-   <span id='main'><%if @plant%><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%></span>
+   <%if @plant%><span id='main'><%=button_to "Add A Comment", new_plant_comment_path(@plant, @comment), method: :get%><%end%></span>
 </body></html>

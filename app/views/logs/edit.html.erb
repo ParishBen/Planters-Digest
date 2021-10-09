@@ -8,11 +8,11 @@
 
 <% if @log.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(@log.errors.count, "error") %> prohibited this log from being edited.</h2>
+<h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this log from being edited.</span></h2>
 
 
 <% @log.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%>

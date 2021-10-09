@@ -7,18 +7,18 @@
 
 <% if @comment.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved.</h2>
+<h2><span id='main'><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved.</span></h2>
 
 
 <% @comment.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%>
 <%end%>
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 
 <h1><span id='main'> Create a Comment</span></h1>

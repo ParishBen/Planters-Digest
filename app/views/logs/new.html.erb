@@ -6,18 +6,18 @@
 <body>
 <% if @log.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(@log.errors.count, "error") %> prohibited this Log from being saved.</h2>
+<h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Log from being saved.</span></h2>
 
 
 <% @log.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%><%end%>
 
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 
 

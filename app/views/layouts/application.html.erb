@@ -9,7 +9,7 @@
   </head>
 
   <body>
-   <nav><span id='user'><%if logged_in?%><%=link_to 'Add A Plant', new_plant_path%>&nbsp; &nbsp;<%= link_to 'Add A Log', new_log_path%>&nbsp; &nbsp;<%= link_to 'Profile', user_path(current_user)%>&nbsp; &nbsp;<%=link_to "Most Popular Plants", plants_path%>&nbsp; &nbsp;<%=link_to "Users Index", users_path%>&nbsp;&nbsp; <%= link_to 'Logout', logout_path, :method => :delete, data: {:confirm => "Confirm to Logout"} %></span></nav><%end%><br><br>
+   <nav><span id='user'><%if logged_in?%><span id='add_plant'><%=link_to 'Add A Plant', new_plant_path%></span>&nbsp; &nbsp;<span id='add_log'><%= link_to 'Add A Log', new_log_path%></span>&nbsp; &nbsp;<span id='profile'><%= link_to 'Profile', user_path(current_user)%></span>&nbsp; &nbsp;<span id='popular_plants'><%=link_to "Most Popular Plants", plants_path%></span>&nbsp; &nbsp;<span id='popular_users'><%=link_to "Users Index", users_path%></span>&nbsp;&nbsp; <span id='logout'><%= link_to 'Logout', logout_path, :method => :delete, data: {:confirm => "Confirm to Logout"} %></span></span></nav><%end%><br><br>
     <%= yield %>
   </body>
 </html>

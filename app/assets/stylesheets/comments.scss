@@ -11,7 +11,11 @@
     font-weight: bold;
 }
 #main{
-  background-color:rgba(9, 206, 25, 0.767);
+  background-color:rgba(9, 206, 25, 0.967);
+}
+#main:any-link:hover{
+  background-color:chartreuse;
+  font-weight:bolder;
 }
 ul {
   list-style-type: none;

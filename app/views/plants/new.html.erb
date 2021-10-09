@@ -6,10 +6,10 @@
 <body>
 <% if @plant.errors.any?%>
 <div id="error_explanation">
-<h2><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from being saved.</h2>
+<h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from being saved.</span></h2>
 
 <% @plant.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li></ul></div>
+<ul><li><span id='main'><%= msg %></span></li></ul></div>
 
 
 <%end%>

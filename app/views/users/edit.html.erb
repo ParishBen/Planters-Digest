@@ -8,7 +8,7 @@
 <div id="error_explanation">
 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being edited.</h2>
 <% @user.errors.full_messages.each do |msg|%>
-<ul><li><%= msg %></li>
+<ul><li><span id='main'><%= msg %></span></li>
 </ul>
 </div>
 <%end%><%end%>
@@ -31,4 +31,5 @@
 
 <%=f.submit%></span>
 <%end%>
+<%if logged_in?%><%=button_to "Cancel", user_path(current_user), method: :get%><%end%>
 </body></html>

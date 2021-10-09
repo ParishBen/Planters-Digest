@@ -6,7 +6,7 @@
 <body>
 <%if flash[:message].present?%>
 <div id="error_explanation">
-<%= flash[:message] %>
+<span id='main'><%= flash[:message] %></span>
 </div><%end%>
 
 <h1><span id='main'>Welcome to Planter's Digest</span></h1>

@@ -21,8 +21,24 @@ ul {
   list-style-type: none;
 }
 #main{
-  background-color:rgba(9, 206, 25, 0.767);
+  background-color:rgba(9, 206, 25, 0.967);
 }
+#main:hover{
+  background-color:chartreuse;
+  font-weight:bolder;
+}
+#beige{
+  background-color: beige;
+  border: 4pt solid burlywood;
+}
+
+
+#plant_search:first-child:hover{
+  font-weight:bolder;
+  background-color: cyan;
+
+}
+
 body {
 // background-color: lightblue;
 text-align: center;
