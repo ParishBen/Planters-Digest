@@ -4,28 +4,31 @@
 
 </head>
 <body>
+        <%#ERROR HANDLE%>
+    <% if @comment.errors.any?%>
+        <div id="error_explanation">
+            <h2><span id='main'><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being edited.</span></h2>
+            <% @comment.errors.full_messages.each do |msg|%>
+           <ul><li>
+                <span id='main'><%= msg %></span>
+          </li></ul>
+        </div>
+     <%end%>
+    <%end%>
 
-<% if @comment.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being edited.</span></h2>
-<% @comment.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li>
-</ul>
-</div>
-<%end%>
-<%end%>
+    <%if flash[:message].present?%>
+    <div id="error_explanation">
+    <span id='main'><%= flash[:message] %></span>
+    </div><%end%>
+    <h1><span id='main'> Edit Comment</span></h1>
+    <%#END OF HANDLING %>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<span id='main'><%= flash[:message] %></span>
-</div><%end%>
-<h1><span id='main'> Edit Comment</span></h1>
-
-<%=form_for(@comment) do |f|%> <span id='main'>
-<%=f.label :content%>
-<%=f.text_area :content%>
-<%=f.hidden_field :commenter_id%>
-<%=f.hidden_field :plant_id%>
-<%=f.submit%></span>
-<%end%>
-</body></html>
+      <%=form_for(@comment) do |f|%> <span id='main'>
+        <%=f.label :content%>
+         <%=f.text_area :content%>
+          <%=f.hidden_field :commenter_id%>
+         <%=f.hidden_field :plant_id%>
+        <%=f.submit%></span>
+      <%end%>
+   </body>
+</html>

@@ -14,7 +14,7 @@ class PlantsController < ApplicationController
           if params[:user_id] && @user.plants.include?(@plant)
             render :show
           else
-          if params[:user_id] ? flash[:message] = "Sorry, That Plant doesn't belong to #{User.find(params[:user_id]).username}" : flash[:message]= "Sorry that isn't a Plant."
+           params[:user_id] ? flash[:message] = "Sorry, That Plant doesn't belong to #{User.find(params[:user_id]).username}" : flash[:message]= "Sorry that isn't a Plant."
              redirect_to plants_path
           end
         end

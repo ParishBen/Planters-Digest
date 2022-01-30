@@ -1,108 +1,102 @@
 <!DOCTYPE html>
-<head>
-<link rel="stylesheet" href="stylesheets/plants.scss" type="text/css">
+  <head>
+  <link rel="stylesheet" href="stylesheets/plants.scss" type="text/css">
+  </head>
 
-</head>
 <body>
+   <%#ERROR HANDLING%>
+  <% if @plant && @plant.errors.any?%>
+  <div id="error_explanation">
+  <h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
+  <% @plant.errors.full_messages.each do |msg|%>
+  <ul><li><span id='main'><%= msg %></li></span></div>
+  <%end%><%end%>
 
+  <%if @comment && @comment.errors.any?%>
+  <div id="error_explanation">
+  <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</h2>
+  <% @comment.errors.full_messages.each do |msg|%>
+  <ul><li><span id='main'><%= msg %></span></li></div>
+  <%end%><%end%>
 
- 
+  <%if @log && @log.errors.any?%>
+  <div id="error_explanation">
+  <h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
+  <% @log.errors.full_messages.each do |msg|%>
+  <ul><li><span id='main'><%= msg %></span></li></div>
+  <%end%><%end%>
 
-<% if @plant && @plant.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
-<% @plant.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></li></span></div>
-<%end%><%end%>
+  <%if flash[:message].present?%>
+  <div id="error_explanation">
+  <span id='main'><%= flash[:message] %></span>
+  </div><%end%>
+<%#END OF ERROR HANDLING%>
 
-<%if @comment && @comment.errors.any?%>
-<div id="error_explanation">
-<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</h2>
-<% @comment.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li></div>
-<%end%><%end%>
+  <%if @plant%>                             
+  <h1><span id='main'>Plant <%=@plant.nickname%>'s Page</span></h1>
+  <h3><span id='main'>Nickname: <%=@plant.nickname%> </span></h3><br>
+  <h3><span id='main'>Plant Type: <%=@plant.plant_type%></span></h3>
+  <!--img src="https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_ponytail-palm_stone.jpg?ver=279298" alt="ponypalm" height=100px width=100px/>-->
+  <%randImg = "#{Faker::LoremFlickr.image(size: '100x100', search_terms: ['plant',"#{@plant.plant_type}"], match_all: true)}"%>
+  <img src=<%="#{ randImg}"%>/>
+  <%end%> 
 
-<%if @log && @log.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
-<% @log.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li></div>
-<%end%><%end%>
+  <%if @plant.logs.present?%>
+  <h3><span id='main'><%=@plant.nickname%>'s Care Logs:</h3></span>
+  <table class="center">
+    <tr>
+          <th><span id='main'>Water Date</span></th>
+          <th><span id='main'>Condition</span></th>
+          <th><span id='main'>Notes</span></th>
+    </tr>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<span id='main'><%= flash[:message] %></span>
-</div><%end%>
+  <%@plant.logs.each do |log|%>
+    <tr>
+      <td><span id='main'> <%= log.water_date.strftime("%m/%d/%Y")%></span></td>
+      <td><span id='main'> <%= log.condition_update%></span></td>
+      <td><span id='main'> <%= log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></span></td><%end%>
+    </tr>
+  <%end%><%end%>
+  </table>
+  <br>
 
-<%if @plant%>                             
-<h1><span id='main'>Plant <%=@plant.nickname%>'s Page</span></h1>
-<h3><span id='main'>Nickname: <%=@plant.nickname%> </span></h3><br>
-<h3><span id='main'>Plant Type: <%=@plant.plant_type%></span></h3>
-<!--img src="https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_ponytail-palm_stone.jpg?ver=279298" alt="ponypalm" height=100px width=100px/>-->
-<%randImg = "#{Faker::LoremFlickr.image(size: '100x100', search_terms: ['plant',"#{@plant.plant_type}"], match_all: true)}"%>
-<img src=<%="#{ randImg}"%>/>
-<%end%> 
+  <%if @plant.user == current_user%>
+    <%=form_for(@log) do |f|%><span id='main'>
+    <%=f.hidden_field :plant_id %>
+    <%=f.label :water_date%>
+    <%=f.date_field :water_date%>
+    <%=f.label :notes%>
+    <%=f.text_field :notes%>
+    <%=f.label :condition_update%>
+    <%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
+    <br><br> 
+    <%=f.submit%></span>
+    <%end%>
+  <%end%>
 
-<%if @plant.logs.present?%>
-<h3><span id='main'><%=@plant.nickname%>'s Care Logs:</h3></span>
+  <%if @plant.comments.present?%>
+  <h3><span id='main'>Comments on <%=@plant.nickname%>:</span></h3>
 
-<table class="center">
-  <tr>
-        <th><span id='main'>Water Date</span></th>
-        <th><span id='main'>Condition</span></th>
-        <th><span id='main'>Notes</span></th>
- </tr>
+  <%@plant.comments.each do |comment|%>
+  <ul><li><span id='main'>
+    <%=link_to comment.commenter.username, user_path(comment.commenter)%>: 
+      <span style="border:1px solid black"><%=comment.content%><%if comment.commenter == current_user%> | <%=link_to 'Edit', edit_comment_path(comment)%> | <%=link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%>
+    </span></span>
+  </li></ul>
+  <%end%>
+    <%else%>
+      <h3><span id='main'>No Comments Yet:</h3></span>
+  <%end%>
 
+  <%= form_for(@comment) do |f|%> <span id='main'>
+  <%=f.hidden_field :plant_id %>
+  <%=f.hidden_field :commenter_id %>
+  <%=f.label :content, 'Add a Comment:'%>
+  <%=f.text_area :content %>
+  <%=f.submit%></span>
+  <%end%>
+   <br>
+  <span id='main'><%=link_to 'Back to Owner', user_path(@plant.user)%></span>
 
-
-<%@plant.logs.each do |log|%>
-<tr>
-<td><span id='main'> <%= log.water_date.strftime("%m/%d/%Y")%></span></td>
-<td><span id='main'> <%= log.condition_update%></span></td>
-<td><span id='main'> <%= log.notes%><%if @plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></span></td><%end%>
-</tr>
-
-<%end%><%end%>
-</table>
-<br>
-
-<%if @plant.user == current_user%>
-<%#refactor%>
-<%=form_for(@log) do |f|%><span id='main'>
-<%#=f.fields_for :logs, @plant.logs.build do |f|%>
-<%=f.hidden_field :plant_id %>
-<%=f.label :water_date%>
-<%=f.date_field :water_date%>
-<%=f.label :notes%>
-<%=f.text_field :notes%>
-<%=f.label :condition_update%>
-<%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
-<br><br> 
-
-
-<%=f.submit%></span>
-<%end%>
-<%end%>
-<%#end%>
-
-<%if @plant.comments.present?%>
-<h3><span id='main'>Comments on <%=@plant.nickname%>:</span></h3>
-<%@plant.comments.each do |comment|%><ul><li><span id='main'>
- <%=link_to comment.commenter.username, user_path(comment.commenter)%>: 
-<span style="border:1px solid black"><%=comment.content%><%if comment.commenter == current_user%> | <%=link_to 'Edit', edit_comment_path(comment)%> | <%=link_to 'Delete', comment_path(comment), method: :delete, data: {confirm: "Would you like to Delete Comment?"}%><%end%>
- </span></span></li> 
-</ul><%end%><%else%>
-<h3><span id='main'>No Comments Yet:</h3></span>
-<%end%>
-
-<%#refactor%>
-<%= form_for(@comment) do |f|%> <span id='main'>
-<%#=f.fields_for :comments, @comment do |f|%> 
-<%=f.hidden_field :plant_id %>
-<%=f.hidden_field :commenter_id %>
-<%=f.label :content, 'Add a Comment:'%>
-<%=f.text_area :content %>
-<%=f.submit%></span>
-<%end%><%#end%><br>
-<span id='main'><%=link_to 'Back to Owner', user_path(@plant.user)%></span>
-</body></html>
+ </body>
+</html>

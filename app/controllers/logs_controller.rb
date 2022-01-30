@@ -14,9 +14,9 @@ class LogsController < ApplicationController
     def create
         @log = Log.new(log_params)
         @plant = Plant.find_by(id: @log.plant_id)
-        if @log.save
-        redirect_to plant_path(@plant)
-        else
+          if @log.save
+            redirect_to plant_path(@plant)
+          else
             flash[:message]= "Ensure All Fields are filled out."
             @conditions = ["It Died :(", "Significant Decline", "Slightly Worse", "No Change", "Slight Improvement", "Much Healthier", "Best Yet! 8^)"]
             render :new 
@@ -48,6 +48,7 @@ class LogsController < ApplicationController
             @log.destroy
             redirect_to plant_path(@log.plant)
         else
+            flash[:message] = "You aren't permitted to delete that Log"
             redirect_to plant_path(@log.plant)
         end
     end
