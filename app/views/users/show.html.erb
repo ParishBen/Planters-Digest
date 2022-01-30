@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
+<link rel="stylesheet" href="assets/stylesheets/users.scss" type="text/css">
 
 </head>
 <body>
@@ -22,7 +22,8 @@
 <h3><span id='main'>Your Info:</span></h3><%else%> <span id='main'><h3>User Info:</h3><%end%></span>
    <p><span id='main'>Username: <%=@user.username%></span><br>
     <span id='main'>Email: <%=@user.email%></span></p>
-    <p style=margin-top: 5px;><span id='main'><%if @user == current_user%><%=link_to "Edit Info", edit_user_path(current_user)%><%end%>
+    <p style=margin-top: 5px;><span id='main'><%if @user == current_user%><%=link_to "Edit Info", edit_user_path(current_user)%> | <%end%>
+    <%if @user == current_user%><%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are You Sure You Want to Delete Account?" } %> <%end%>
 </span></p><br>
 
     <%if @user.plants.present? && @user == current_user%>
@@ -43,5 +44,4 @@
     <%= button_to "Log Out", logout_path, :method => :delete, data: {confirm: "Please Confirm to Logout"}%><%end%>
     <%if !logged_in?%>
     <p>Please <%=link_to "Sign Up", signup_path%> or <%=link_to "Log in", login_path%></p><%end%>
-    <%if @user == current_user%><span id='main'><%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are You Sure You Want to Delete Account?" } %> <%end%>
     </span></body></html>

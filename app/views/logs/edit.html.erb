@@ -7,32 +7,34 @@
 <div id='main-div'>
 
 <% if @log.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this log from being edited.</span></h2>
-
-
-<% @log.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li>
-</ul>
-</div>
-<%end%>
+  <div id="error_explanation">
+   <h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this log from being edited.</span></h2>
+    <% @log.errors.full_messages.each do |msg|%>
+    <ul><li>
+    <span id='main'><%= msg %></span>
+   </li></ul>
+  </div>
+  <%end%>
 <%end%>
 <%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
-
-<h1> Edit a Log</h1>
-
-<%=form_for(@log) do |f|%>
-<%=f.label :water_date%>
-<%=f.date_field :water_date%>
-<%=f.hidden_field :plant_id%>
-<%=f.collection_select :condition_update, @conditions, :to_s, :to_s%>
-<%=f.label :notes%>
-<%=f.text_field :notes%>
-<%=f.submit%>
+ <div id="error_explanation">
+   <%= flash[:message] %>
+ </div>
 <%end%>
-<br>
-<%=link_to "Back", plant_path(@log.plant)%>
-</div></body></html>
+
+    <h1> Edit a Log</h1>
+
+    <%=form_for(@log) do |f|%>
+    <%=f.label :water_date%>
+    <%=f.date_field :water_date%>
+    <%=f.hidden_field :plant_id%>
+    <%=f.collection_select :condition_update, @conditions, :to_s, :to_s%>
+    <%=f.label :notes%>
+    <%=f.text_field :notes%>
+    <%=f.submit%>
+    <%end%>
+    <br>
+    <%=link_to "Back", plant_path(@log.plant)%>
+   </div>
+ </body>
+</html>

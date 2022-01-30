@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     include UsersHelper
 
     def welcome
-        if !logged_in?
+        if !logged_in? || !params[:id]
            render :welcome
         else 
             redirect_to user_path(current_user)
@@ -49,6 +49,16 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])     
+    end
+
+    def destroy
+        @user = User.find_by(id: params[:id])
+        redirect_if_not_logged_in
+        if @user == current_user
+            @user.destroy
+            reset_session
+            redirect_to welcome_path
+        end
     end
 
     private

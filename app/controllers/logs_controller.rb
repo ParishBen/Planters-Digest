@@ -68,7 +68,7 @@ class LogsController < ApplicationController
     end
 
     def set_plant
-        @log =  @log = Log.find_by(id: params[:id])
+        @log = Log.find_by(id: params[:id])
         @plant = Plant.find_by(id: @log.plant_id)        
     end
 end
