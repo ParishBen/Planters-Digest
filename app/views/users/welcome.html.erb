@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
-
+<link rel="stylesheet" href="stylesheets/users.scss" type="text/css">  
 </head>
-<body>
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<span id='main'><%= flash[:message] %></span>
-</div><%end%>
+  <body>
+    <%#ERROR HANDLING%>
+    <%if flash[:message].present?%>
+      <div id="error_explanation">
+        <span id='main'><%= flash[:message] %></span>
+      </div>
+    <%end%>
 
-<h1><span id='main'>Welcome to Planter's Digest</span></h1>
-<%#= javascript_pack_tag 'testing' %>
-<%#= javascript_pack_tag 'custom'%>
-<p><span id='main'>Please <%=link_to 'Sign Up', new_user_path%> , <%=link_to 'Log in', login_path%> or <%=link_to "Sign in with Google", '/auth/google_oauth2'%></span></p>
-</body></html>
+    <h1><span id='main'>Welcome to Planter's Digest</span></h1>
+
+    <p><span id='main'>
+       Please <%=link_to 'Sign Up', new_user_path%> , <%=link_to 'Log in', login_path%> or <%=link_to "Sign in with Google", '/auth/google_oauth2'%>
+    </span></p>
+  </body>
+</html>

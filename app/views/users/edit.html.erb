@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" href="stylesheets/users.scss" type="text/css">
-
 </head>
-<body>
-<% if @user.errors.any?%>
-<div id="error_explanation">
-<h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being edited.</h2>
-<% @user.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li>
-</ul>
-</div>
-<%end%><%end%>
+  <body>
+        <%#ERROR HANDLING%>
+    <% if @user.errors.any?%>
+     <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this Account from being edited.</h2>
+         <% @user.errors.full_messages.each do |msg|%>
+       <ul><li>
+       <span id='main'><%= msg %></span>
+      </li></ul>
+     </div>
+    <%end%><%end%>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<%= flash[:message] %>
-</div><%end%>
+    <%if flash[:message].present?%>
+      <div id="error_explanation">
+       <%= flash[:message] %>
+      </div>
+    <%end%>
+    <%#END%>
 
-<h1><span id='main'>Edit Your Profile!</span></h1>
-<%=form_for(@user) do |f|%><span id='main'>
-<%=f.label :name%>
-<%=f.text_field :name%><br>
-<%=f.label :username%>
-<%=f.text_field :username%><br>
-<%=f.label :email%>
-<%=f.text_field :email%><br>
-<%=f.label :password%>
-<%=f.password_field :password%><br>
-
-<%=f.submit%></span>
-<%end%>
-<%if logged_in?%><%=button_to "Cancel", user_path(current_user), method: :get%><%end%>
-</body></html>
+    <h1><span id='main'>Edit Your Profile!</span></h1>
+      <%=form_for(@user) do |f|%><span id='main'>
+        <%=f.label :name%>
+        <%=f.text_field :name%><br>
+        <%=f.label :username%>
+        <%=f.text_field :username%><br>
+        <%=f.label :email%>
+        <%=f.text_field :email%><br>
+        <%=f.label :password%>
+        <%=f.password_field :password%><br>
+      <%=f.submit%></span>
+    <%end%>
+    <%if logged_in?%><%=button_to "Cancel", user_path(current_user), method: :get%>
+    <%end%>
+ </body>
+</html>

@@ -6,29 +6,29 @@
 <body>
    <%#ERROR HANDLING%>
   <% if @plant && @plant.errors.any?%>
-  <div id="error_explanation">
-  <h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
-  <% @plant.errors.full_messages.each do |msg|%>
-  <ul><li><span id='main'><%= msg %></li></span></div>
+    <div id="error_explanation">
+      <h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
+     <% @plant.errors.full_messages.each do |msg|%>
+   <ul><li><span id='main'><%= msg %></li></span></div>
   <%end%><%end%>
 
   <%if @comment && @comment.errors.any?%>
-  <div id="error_explanation">
-  <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</h2>
-  <% @comment.errors.full_messages.each do |msg|%>
-  <ul><li><span id='main'><%= msg %></span></li></div>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</h2>
+     <% @comment.errors.full_messages.each do |msg|%>
+   <ul><li><span id='main'><%= msg %></span></li></div>
   <%end%><%end%>
 
   <%if @log && @log.errors.any?%>
-  <div id="error_explanation">
-  <h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
-  <% @log.errors.full_messages.each do |msg|%>
-  <ul><li><span id='main'><%= msg %></span></li></div>
+    <div id="error_explanation">
+     <h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
+       <% @log.errors.full_messages.each do |msg|%>
+     <ul><li><span id='main'><%= msg %></span></li></div>
   <%end%><%end%>
 
   <%if flash[:message].present?%>
-  <div id="error_explanation">
-  <span id='main'><%= flash[:message] %></span>
+    <div id="error_explanation">
+     <span id='main'><%= flash[:message] %></span>
   </div><%end%>
 <%#END OF ERROR HANDLING%>
 
@@ -42,7 +42,7 @@
   <%end%> 
 
   <%if @plant.logs.present?%>
-  <h3><span id='main'><%=@plant.nickname%>'s Care Logs:</h3></span>
+    <h3><span id='main'><%=@plant.nickname%>'s Care Logs:</h3></span>
   <table class="center">
     <tr>
           <th><span id='main'>Water Date</span></th>
@@ -60,22 +60,22 @@
   </table>
   <br>
 
-  <%if @plant.user == current_user%>
-    <%=form_for(@log) do |f|%><span id='main'>
-    <%=f.hidden_field :plant_id %>
-    <%=f.label :water_date%>
-    <%=f.date_field :water_date%>
-    <%=f.label :notes%>
-    <%=f.text_field :notes%>
-    <%=f.label :condition_update%>
-    <%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
-    <br><br> 
-    <%=f.submit%></span>
+    <%if @plant.user == current_user%>
+     <%=form_for(@log) do |f|%><span id='main'>
+       <%=f.hidden_field :plant_id %>
+       <%=f.label :water_date%>
+       <%=f.date_field :water_date%>
+       <%=f.label :notes%>
+       <%=f.text_field :notes%>
+       <%=f.label :condition_update%>
+       <%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
+       <br><br> 
+     <%=f.submit%></span>
     <%end%>
   <%end%>
 
   <%if @plant.comments.present?%>
-  <h3><span id='main'>Comments on <%=@plant.nickname%>:</span></h3>
+    <h3><span id='main'>Comments on <%=@plant.nickname%>:</span></h3>
 
   <%@plant.comments.each do |comment|%>
   <ul><li><span id='main'>
@@ -89,13 +89,13 @@
   <%end%>
 
   <%= form_for(@comment) do |f|%> <span id='main'>
-  <%=f.hidden_field :plant_id %>
-  <%=f.hidden_field :commenter_id %>
-  <%=f.label :content, 'Add a Comment:'%>
-  <%=f.text_area :content %>
+    <%=f.hidden_field :plant_id %>
+    <%=f.hidden_field :commenter_id %>
+    <%=f.label :content, 'Add a Comment:'%>
+    <%=f.text_area :content %>
   <%=f.submit%></span>
   <%end%>
-   <br>
+<br>
   <span id='main'><%=link_to 'Back to Owner', user_path(@plant.user)%></span>
 
  </body>
