@@ -1,14 +1,15 @@
 class CommentsController < ApplicationController
     before_action :redirect_if_not_logged_in
     include UsersHelper
+    
     def index 
         if params[:plant_id]
             @plant = Plant.find_by(id: params[:plant_id])
-            @comments = @plant.comments
+             @comments = @plant.comments
             @comment = Comment.new
         else 
             @comments = Comment.all 
-      end
+        end
     end
 
     def new
@@ -22,12 +23,12 @@ class CommentsController < ApplicationController
         @comment = Comment.new(comment_params)
         @plant = Plant.find_by(id: @comment.plant_id)
         @comment.commenter_id = current_user.id
-        if @comment.save
+          if @comment.save
             redirect_to plant_path(@plant)
-        else
+          else
             flash[:message]= "Please ensure content is not empty."
             render :new
-        end
+         end
     end
 
     def edit
@@ -40,7 +41,7 @@ class CommentsController < ApplicationController
         not_the_commenter
          if @comment.update(comment_params)
             redirect_to plant_path(@comment.plant)
-        else 
+         else 
             flash[:message]= "Please ensure content is not empty." 
             render :edit
         end
@@ -48,13 +49,13 @@ class CommentsController < ApplicationController
 
     def show
         @comment = Comment.find(params[:id])
-        flash[:message]= "Directed To Comment's Plant Page"
+          flash[:message]= "Directed To Comment's Plant Page"
         redirect_to plant_path(@comment.plant)
-        end
+    end
 
     def destroy
         @comment = Comment.find(params[:id])
-        not_the_commenter
+         not_the_commenter
           if @comment.destroy
             redirect_to plant_path(@comment.plant)
         end
@@ -65,6 +66,4 @@ class CommentsController < ApplicationController
     def comment_params
         params.require(:comment).permit(:plant_id, :commenter_id, :content)
     end
-
-
 end
