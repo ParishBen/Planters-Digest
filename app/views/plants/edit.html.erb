@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" href="stylesheets/plants.scss" type="text/css">
-
 </head>
 <body>
+    <%#ERROR HANDLING%>
+    <% if @plant.errors.any?%>
+    <div id="error_explanation">
+      <h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
+       <% @plant.errors.full_messages.each do |msg|%>
+     <ul><li>
+      <span id='main'><%= msg %></span>
+     </li></ul>
+    </div>
+    <%end%><%end%>
 
-<% if @plant.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@plant.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
-<% @plant.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li></div>
-<%end%><%end%>
-
-<%if @comment && @comment.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</span></h2>
-<% @comment.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li></div>
-<%end%><%end%>
+    <%if @comment && @comment.errors.any?%>
+    <div id="error_explanation">
+      <h2><span id='main'><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from updated.</span></h2>
+        <% @comment.errors.full_messages.each do |msg|%>
+      <ul><li>
+       <span id='main'><%= msg %></span>
+      </li></ul>
+    </div>
+    <%end%><%end%>
 
 
-<%if @log && @log.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
-<% @log.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li></div>
-<%end%><%end%>
+    <%if @log && @log.errors.any?%>
+    <div id="error_explanation">
+      <h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Plant from updated.</span></h2>
+       <% @log.errors.full_messages.each do |msg|%>
+     <ul><li>
+      <span id='main'><%= msg %></span>
+     </li></ul>
+    </div>
+    <%end%><%end%>
 
-<%if flash[:message].present?%>
-<span id="error_explanation">
-<span id='main'><%= flash[:message] %></span>
-</div><%end%>
+    <%if flash[:message].present?%>
+    <div id="error_explanation">
+      <span id='main'><%= flash[:message] %></span>
+    </div><%end%>
 
-<h1><span id='main'>Edit <%=@plant.nickname%></span></h1>
-<%=form_for(@plant) do |f|%><span id='main'>
-<%=f.label :plant_type%>
-<%=f.text_field :plant_type%><br>
-<%=f.label :nickname%>
-<%=f.text_field :nickname%><br>
-<%=f.submit%></span>
-<%end%><br>
-<span id='main'><%=link_to "Back to #{@plant.nickname}", plant_path(@plant)%></span>
+    <%#END OF HANDLING%>
 
-</body></html>
+    <h1><span id='main'>Edit <%=@plant.nickname%></span></h1>
+      <%=form_for(@plant) do |f|%><span id='main'>
+        <%=f.label :plant_type%>
+        <%=f.text_field :plant_type%><br>
+        <%=f.label :nickname%>
+        <%=f.text_field :nickname%><br>
+      <%=f.submit%></span>
+    <%end%>
+    <br>
+
+    <span id='main'><%=link_to "Back to #{@plant.nickname}", plant_path(@plant)%></span>
+
+  </body>
+</html>

@@ -3,34 +3,36 @@
 <link rel="stylesheet" href="stylesheets/logs.scss" type="text/css">
 </head>
 <body>
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<span id='main'><%= flash[:message] %></span>
-</div><%end%>
+    <%#ERROR HANDLING%>
+    <%if flash[:message].present?%>
+     <div id="error_explanation">
+      <span id='main'><%= flash[:message] %></span>
+    </div><%end%>
+    <%#END%>
+    <h1><span id='main'>
+       <%if params[:plant_id]%><%=@plant.nickname%>'s Logs</h1>
+       <%else%> ALL LOGS
+    </span></h1><%end%>
 
-<h1><span id='main'><%if params[:plant_id]%><%=@plant.nickname%>'s Logs</h1><%else%>ALL LOGS</span></h1><%end%>
+    <%if @logs.present?%>
+      <table class="center">
+       <tr>
+            <th><span id='main'>Water Date</span></th>
+            <th><span id='main'>Condition</span></th>
+            <th><span id='main'>Notes</span></th>
+       </tr>
 
-<%if @logs.present?%>
-<table class="center">
-  <tr>
-        <th><span id='main'>Water Date</span></th>
-        <th><span id='main'>Condition</span></th>
-        <th><span id='main'>Notes</span></th>
- </tr>
+    <% @logs.each do |log|%>
+      <tr>
+          <td><span id='main'> <%= log.water_date.strftime("%m/%d/%Y")%></span></td>
+          <td><span id='main'> <%= log.condition_update%></span></td>
+          <td><span id='main'> <%= log.notes%><%if log.plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></span></td><%end%>
+      </tr>
+       <%end%>
+     </table>
 
-
-
-<% @logs.each do |log|%>
-<tr>
-<td><span id='main'> <%= log.water_date.strftime("%m/%d/%Y")%></span></td>
-<td><span id='main'> <%= log.condition_update%></span></td>
-<td><span id='main'> <%= log.notes%><%if log.plant.user == current_user%> | <%= link_to 'Edit Log', edit_log_path(log)%> | <%=link_to 'Delete Log', log_path(log), method: :delete, data: {confirm: "Would you like to Delete Log?"}%></span></td><%end%>
-</tr>
-<%end%>
-
-</table>
-
-<%else%>
-<h3><span id='main'>No Logs to date</span></h3>
-<%end%>
-</body></html>
+     <%else%>
+       <h3><span id='main'>No Logs to date</span></h3>
+     <%end%>
+   </body>
+</html>

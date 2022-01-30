@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <head>
 <link rel="stylesheet" href="stylesheets/logs.scss" type="text/css">
-
 </head>
+
 <body>
-<% if @log.errors.any?%>
-<div id="error_explanation">
-<h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Log from being saved.</span></h2>
+    <%#ERROR HANDLING%>
+    <% if @log.errors.any?%>
+    <div id="error_explanation">
+      <h2><span id='main'><%= pluralize(@log.errors.count, "error") %> prohibited this Log from being saved.</span></h2>
+        <% @log.errors.full_messages.each do |msg|%>
+         <ul><li>
+        <span id='main'><%= msg %></span>
+      </li></ul>
+    </div>
+    <%end%><%end%>
 
+    <%if flash[:message].present?%>
+      <div id="error_explanation">
+       <span id='main'><%= flash[:message] %></span>
+      </div>
+   <%end%>
+   <%#END OF HANDLING%>
 
-<% @log.errors.full_messages.each do |msg|%>
-<ul><li><span id='main'><%= msg %></span></li>
-</ul>
-</div>
-<%end%><%end%>
+    <%if !params[:plant_id]%>
+      <h1><span id='main'> Create a Log</span></h1>
+    <%else%>
+      <h1><span id='main'>New Log for <%=Plant.find(params[:plant_id]).nickname%></span></h1>
+    <%end%>
+    <%if current_user.plants.empty?%>
+      <p><span id='main'>Looks Like you need a Plant first <%=link_to 'Add A Plant', new_plant_path%></span></p>
+    <%else%>
 
-<%if flash[:message].present?%>
-<div id="error_explanation">
-<span id='main'><%= flash[:message] %></span>
-</div><%end%>
+    <%=form_for(@log) do |f|%><span id='main'>
+        <%if params[:plant_id].nil?%>
+          <%=f.label "Plant:"%>
+          <%=f.collection_select :plant_id, current_user.plants, :id, :nickname%>
+        <%else%>
+          <%=f.hidden_field :plant_id%>
+        <%end%>
+          <%=f.label :water_date%>:
+          <%=f.date_field :water_date%>
+          <%=f.label :condition_update%>:
+          <%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
+          <%=f.label :notes%>:
+          <%=f.text_field :notes%>
+    <%=f.submit%></span>
+ <%end%><%end%><br>
 
-
-<%if !params[:plant_id]%><h1><span id='main'> Create a Log</span></h1><%else%><h1><span id='main'>New Log for <%=Plant.find(params[:plant_id]).nickname%></span></h1><%end%>
-<%if current_user.plants.empty?%>
-<p><span id='main'>Looks Like you need a Plant first <%=link_to 'Add A Plant', new_plant_path%></span></p>
-<%else%>
-
-<%=form_for(@log) do |f|%><span id='main'>
-<%if params[:plant_id].nil?%>
-<%=f.label "Plant:"%>
-<%=f.collection_select :plant_id, current_user.plants, :id, :nickname%>
-<%else%>
-<%=f.hidden_field :plant_id%><%end%>
-<%=f.label :water_date%>:
-<%=f.date_field :water_date%>
-<%=f.label :condition_update%>:
-<%=f.collection_select :condition_update, @conditions, :to_s, :to_s, {:selected => "No Change"}%>
-<%=f.label :notes%>:
-<%=f.text_field :notes%>
-<%=f.submit%></span>
-<%end%><%end%>
-<br>
-
-<span id='main'><%=link_to 'Back to Profile', user_path(current_user)%></span>
-</body></html>
+    <span id='main'><%=link_to 'Back to Profile', user_path(current_user)%></span>
+  </body>
+</html>
